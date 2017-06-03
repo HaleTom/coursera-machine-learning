@@ -19,9 +19,7 @@ for iter = 1:num_iters
 
     % delta = 1/m * (X * theta - y) * X
 
-
-
-
+    theta = theta - alpha / m * X' * (X * theta - y);
 
     % ============================================================
 
@@ -32,5 +30,11 @@ for iter = 1:num_iters
     % printf('Cost: %8.3f, Gradient: %8.3f', J_history(iter), partial)
 
 end
+
+% % Debug 
+% figure(9)
+% title('J(theta)')
+% plot(J_history)
+% figure(1) 
 
 end
