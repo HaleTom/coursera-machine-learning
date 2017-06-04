@@ -1,83 +1,63 @@
-
-function [theta, J_history] = gradientDescent(X, y, theta=zeros(columns(X),1), alpha=0.001, num_iters=50000)
+function [theta, J_history] = gradientDescent(X, y, theta=zeros(columns(X),1), alpha=0.001, num_iters=1e4)
 %GRADIENTDESCENT Performs gradient descent to learn theta
 %   theta = GRADIENTDESCENT(X, y, theta, alpha, num_iters) updates theta by 
 %   taking num_iters gradient steps with learning rate alpha
 
+debug = false;
+pre_tune_alpha = false;
+use_epsilon = true;
+epsilon=1e-9;
+tune_alpha = false; % See FAIL below
+
+if debug,
+    printf('Called with alpha = %f, num_iters=%f\n', alpha, num_iters);
+end
+
 currentFig=gcf(); % Restore for assignment script at the end
 
-% Initialize some useful values
-m = length(y); % number of training examples
-J_history = [];
-
-epsilon=10^-5;
-iter = 0;
-
 % Tune alpha upwards
-alpha_scale=1.9 ; % Scaling factor
-alphas=[alpha]; % Store values for graphing
-
 prev_cost = Inf;
 cost = computeCost(X, y, theta);
-cost
-prev_cost
 
-% Tune alpha upwards
-alpha_scale=1.2 ; % Scaling factor
+alpha_scale=1.1; % Scaling factor
 alphas=[]; % Store values for graphing
- 
 prev_cost = Inf;
 cost = computeCost(X, y, theta);
- 
 try_alpha = alpha;
-new_theta = theta;
-while (cost < prev_cost),
-    % prev_cost = computeCost(X, y, theta);
-    % if cost < prev_cost,
+iter = 0;
+while (pre_tune_alpha && cost < prev_cost),
     prev_cost = cost;
-    % theta = new_theta;
-    % J_history(++iter) = cost;
- 
-    % printf('Alpha: %8.3f, Cost: %8.3f\n', alpha, cost);
- 
+
     alpha = try_alpha;
     alphas = [alphas try_alpha];
- 
+
     try_alpha = alpha * alpha_scale;
     new_theta = update_theta(X, y, theta, try_alpha);
     cost = computeCost(X, y, new_theta);
     iter++;
 end
+if debug,
+    % alpha = orig_alpha; iter=0;
+    printf('Chose alpha = %f after %d iterations\n', alpha, iter);
+end
 
-% alphas = alphas'
-iter
-theta
+if debug && pre_tune_alpha,
+    % Plot alpha tuning
+    alphaPlot=figure();
+    plot(alphas);
+    legend('alpha');
+    title('Alpha tuning');
+    xlabel('Iterations');
+end
 
-% Plot alpha tuning
-alphaPlot=figure();
-plot(alphas);
-legend('alpha');
-title('Alpha tuning');
-xlabel('Iterations');
-
-% alpha=0.001; iter=0;
-printf('Chose alpha = %f after %d iterations\n', alpha, iter);
+% Initialize some useful values
+m = length(y); % number of training examples
+J_history = [];
 
 iter = 0;
 cost = Inf;
 prev_cost = -Inf;
-
-first_loop = true;
-while iter++ <= num_iters && abs(prev_cost - cost) > epsilon,
-
-    % ====================== YOUR CODE HERE ======================
-    % Instructions: Perform a single gradient step on the parameter vector
-    %               theta. 
-    %
-    % Hint: While debugging, it can be useful to print out the values
-    %       of the cost function (computeCost) and gradient here.
-    %
-
+while ++iter <= num_iters && abs(prev_cost - cost) > epsilon,
     prev_cost = cost;
     prev_theta = theta;
 
@@ -85,35 +65,36 @@ while iter++ <= num_iters && abs(prev_cost - cost) > epsilon,
 
     % Compute cost with new theta
     cost = computeCost(X, y, theta);
-    % if cost > prev_cost,
-    if cost > 10e10
-        printf('Bailing: cost out of bounds in iteration %d\n', iter);
+    if cost > prev_cost,
+    % if cost > 10e10,
+        printf('Bailing: strange cost in iteration %d\n', iter);
         theta = NaN;
         break;
     end
 
-    % Tune alpha after some time for convergence
-    if !first_loop, alpha *= prev_cost / cost; end
-    % alpha *= prev_cost / cost;
+    % % Tune alpha after after prev_cost is setup
+    % if tune_alpha && iter > 1, alpha *= .98 * prev_cost / cost; end
+    % FAILS on: gradientDescent(X, y, [0;0], 0.015390, 1e5)
 
     % Save the cost J in every iteration
     J_history(iter) = cost;
 
     % Have we converged?
-    if abs(prev_cost - cost) < epsilon,
+    if use_epsilon && abs(prev_cost - cost) < epsilon,
         break;
     end
-    first_loop = false; % Not in the first loop anymore
-    % ============================================================
 end
 
-iter
-% Plot cost against descent iterations
-figure();
-plot(J_history);
-title('J(theta)');
-xlabel('Iterations');
-figure(currentFig);
+if debug,
+    iter -= 1 % Print steps to convergence
+    cost
+    % Plot cost against descent iterations
+    figure();
+    plot(J_history);
+    title('J(theta)');
+    xlabel('Iterations');
+    figure(currentFig);
+end
 
 end
 
