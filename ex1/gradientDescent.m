@@ -1,4 +1,4 @@
-function [theta, J_history] = gradientDescent(X, y, theta=zeros(columns(X),1), alpha=0.001, num_iters=1e4)
+function [theta, J_history] = gradientDescent(X, y, theta=zeros(columns(X),1), alpha=0.001, num_iters=1e4, auto_tune=false)
 %GRADIENTDESCENT Performs gradient descent to learn theta
 %   theta = GRADIENTDESCENT(X, y, theta, alpha, num_iters) updates theta by 
 %   taking num_iters gradient steps with learning rate alpha
@@ -7,7 +7,7 @@ debug = false;
 pre_tune_alpha = false;
 use_epsilon = true;
 epsilon=1e-9;
-tune_alpha = false; % See FAIL below
+tune_alpha = false; % See FAIL below. Use gradients instead costs decrease perhaps?
 
 if debug,
     printf('Called with alpha = %f, num_iters=%f\n', alpha, num_iters);
@@ -65,8 +65,8 @@ while ++iter <= num_iters && abs(prev_cost - cost) > epsilon,
 
     % Compute cost with new theta
     cost = computeCost(X, y, theta);
-    if cost > prev_cost,
-    % if cost > 10e10,
+    % if cost > prev_cost,
+    if cost > 10e10,
         printf('Bailing: strange cost in iteration %d\n', iter);
         theta = NaN;
         break;
