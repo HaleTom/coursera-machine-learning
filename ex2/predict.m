@@ -15,10 +15,11 @@ p = zeros(m, 1);
 %               You should set p to a vector of 0's and 1's
 %
 
+hX = sigmoid(X * theta);
 
+p1 = find(hX >= 0.5);
 
-
-
+p(p1) = 1;
 
 
 % =========================================================================

@@ -17,6 +17,12 @@ if size(X, 2) <= 3
     plot_x = [min(X(:,2))-2,  max(X(:,2))+2];
 
     % Calculate the decision boundary line
+
+    % https://www.coursera.org/learn/machine-learning/discussions/weeks/3/threads/HAEss7C7EeWoGg6ulZMPEw
+    % Solve X * theta for term theta(2):
+    % 0=θ0+x1θ1+x2θ2
+    % x2=−(θ0+x1θ1)/θ2
+    % Octave indexed start at 1 below:
     plot_y = (-1./theta(3)).*(theta(2).*plot_x + theta(1));
 
     % Plot, and adjust axes for better viewing

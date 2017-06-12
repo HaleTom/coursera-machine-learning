@@ -17,10 +17,18 @@ grad = zeros(size(theta));
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 
+hX = sigmoid(X * theta);
 
+% J = (-y' * log(hX) - (1 - y')*log(1 - hX)) / m;
+%
 
+% Ones only for elements 2:end
+regressionMask = ones(size(theta)) - eye(size(theta));
 
+[J, grad] = costFunction(theta, X, y);
 
+J += lambda / 2 / m * theta' * (theta .* regressionMask);
+grad += lambda * theta .* regressionMask / m;
 
 % =============================================================
 
