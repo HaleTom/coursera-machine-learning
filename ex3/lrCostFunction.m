@@ -8,9 +8,20 @@ function [J, grad] = lrCostFunction(theta, X, y, lambda)
 % Initialize some useful values
 m = length(y); % number of training examples
 
-% You need to return the following variables correctly 
+% You need to return the following variables correctly
 J = 0;
 grad = zeros(size(theta));
+
+hX = sigmoid(X * theta);
+
+% Ones only for elements 2:end
+regressionMask = ones(size(theta)) - eye(size(theta));
+
+[J, grad] = costFunction(theta, X, y);
+
+J += lambda / 2 / m * theta' * (theta .* regressionMask);
+grad += lambda * theta .* regressionMask / m;
+
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta.
