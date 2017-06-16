@@ -21,13 +21,15 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% Add intercept term to training set
+X = [ones(size(X,1),1) X];
 
+A1 = sigmoid(X * Theta1');
+A1 = [ones(size(X,1), 1) A1];
 
+A2 = sigmoid(A1 * Theta2');
 
-
-
-
-
+[_, p] = max(A2, [], 2);
 
 % =========================================================================
 
