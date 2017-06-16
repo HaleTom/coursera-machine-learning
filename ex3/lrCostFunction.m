@@ -15,12 +15,12 @@ grad = zeros(size(theta));
 hX = sigmoid(X * theta);
 
 % Ones only for elements 2:end
-regressionMask = ones(size(theta)) - eye(size(theta));
+regularisationMask = ones(size(theta)) - eye(size(theta));
 
 [J, grad] = costFunction(theta, X, y);
 
-J += lambda / 2 / m * theta' * (theta .* regressionMask);
-grad += lambda * theta .* regressionMask / m;
+J += lambda / 2 / m * theta' * (theta .* regularisationMask);
+grad += lambda * theta .* regularisationMask / m;
 
 
 % ====================== YOUR CODE HERE ======================
