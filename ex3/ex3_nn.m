@@ -37,8 +37,8 @@ load('ex3data1.mat');
 m = size(X, 1);
 
 % Randomly select 100 data points to display
-sel = randperm(size(X, 1));
-sel = sel(1:100);
+sel = randperm(size(X, 1), 100);
+% sel = sel(1:100);
 
 displayData(X(sel, :));
 
@@ -62,7 +62,8 @@ load('ex3weights.mat');
 
 pred = predict(Theta1, Theta2, X);
 
-fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
+% fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
+fprintf('\nTraining Set Accuracy: %f\n', mean(pred == y) * 100);
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
