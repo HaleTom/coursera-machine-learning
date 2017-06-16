@@ -12,6 +12,14 @@ function plotDecisionBoundary(theta, X, y)
 plotData(X(:,2:3), y);
 hold on
 
+
+% 
+% Plot decision boundary code discussion:
+% https://www.coursera.org/learn/machine-learning/discussions/weeks/3?q=plotdecisionboundary
+% https://www.coursera.org/learn/machine-learning/discussions/weeks/3/threads/HAEss7C7EeWoGg6ulZMPEw
+% https://www.coursera.org/learn/machine-learning/discussions/weeks/3/threads/d18XMEk-EeeqVwpT36CBzg
+%
+
 if size(X, 2) <= 3
     % Only need 2 points to define a line, so choose two endpoints
     plot_x = [min(X(:,2))-2,  max(X(:,2))+2];
