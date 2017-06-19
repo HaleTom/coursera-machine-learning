@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://share.coursera.org/wiki/index.php/ML:Errata:_Week_9 -->
+<html lang="en" dir="ltr" class="client-js" slick-uniqueid="3"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ML:Errata: Week 9 - Coursera</title>
+
+<meta name="generator" content="MediaWiki 1.18.1">
+<link rel="alternate" type="application/x-wiki" title="Edit" href="https://share.coursera.org/wiki/index.php?title=ML:Errata:_Week_9&amp;action=edit">
+<link rel="edit" title="Edit" href="https://share.coursera.org/wiki/index.php?title=ML:Errata:_Week_9&amp;action=edit">
+<link rel="shortcut icon" href="https://share.coursera.org/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="https://share.coursera.org/wiki/opensearch_desc.php" title="Coursera (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://share.coursera.org/wiki/api.php?action=rsd">
+<link rel="alternate" type="application/atom+xml" title="Coursera Atom feed" href="https://share.coursera.org/wiki/index.php?title=Special:RecentChanges&amp;feed=atom">
+<link rel="stylesheet" href="./ML_Errata_ Week 9 - Coursera_files/load.php">
+<link rel="stylesheet" href="./ML_Errata_ Week 9 - Coursera_files/load(1).php">
+<link rel="stylesheet" href="./ML_Errata_ Week 9 - Coursera_files/print.css" media="print">
+<link rel="stylesheet" href="./ML_Errata_ Week 9 - Coursera_files/cavendish.css" media="screen">
+<!--[if lt IE 5.5000]><link rel="stylesheet" href="/wiki/skins/cavendish/IE50Fixes.css?303" media="screen" /><![endif]-->
+<!--[if IE 5.5000]><link rel="stylesheet" href="/wiki/skins/cavendish/IE55Fixes.css?303" media="screen" /><![endif]-->
+<!--[if IE 6]><link rel="stylesheet" href="/wiki/skins/cavendish/IE60Fixes.css?303" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/wiki/skins/cavendish/IE70Fixes.css?303" media="screen" /><![endif]-->
+<link rel="stylesheet" href="./ML_Errata_ Week 9 - Coursera_files/bootstrap-wrapped.css" media="screen"><style>#header h6 a { background: transparent no-repeat; width:322px;height:53px;}</style><link type="text/css" media="all" rel="stylesheet" href="./ML_Errata_ Week 9 - Coursera_files/jquery.makeCollapsible.css"><link type="text/css" media="all" rel="stylesheet" href="./ML_Errata_ Week 9 - Coursera_files/jquery.messageBox.css"><meta name="ResourceLoaderDynamicStyles" content="">
+<style>a:lang(ar), a:lang(ckb), a:lang(fa),a:lang(kk-arab), a:lang(mzn), a:lang(ps), a:lang(ur) { text-decoration: none; }
+a.new, #quickbar a.new { color: #ba0000; }
+
+</style>
+<script src="./ML_Errata_ Week 9 - Coursera_files/load(2).php"></script><style type="text/css">
+:root #content > #right > .dose > .dosesingle,
+:root #content > #center > .dose > .dosesingle,
+:root #header + #content > #left > #rlblock_left
+{ display: none !important; }</style><script src="./ML_Errata_ Week 9 - Coursera_files/load(3).php"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "ML", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 518, "wgPageName": "ML:Errata:_Week_9", "wgTitle": "Errata: Week 9", "wgCurRevisionId": 34315, "wgArticleId": 117, "wgIsArticle": true, "wgAction": "view", "wgUserName": "3d6475439e09427226cbb8e26ccb8518", "wgUserGroups": ["*", "user", "autoconfirmed"], "wgCategories": ["ML:Errata"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/load(4).php"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/jquery.client.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/mediawiki.page.startup.js.download"></script>
+<style type="text/css">#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-family: serif; font-style: normal; font-size: 90%}
+.MathJax_Preview {color: #888888}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-family: serif; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; border: 0; padding: 0; margin: 0}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0 !important; padding: 0 !important; margin: 0 !important; vertical-align: 0 !important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap}
+.MathJax img {display: inline ! important}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax .MathJax_HitBox {cursor: text}
+#MathJax_Tooltip * {filter: none; background: transparent}
+@font-face {font-family: MathJax_Main; src: url('https://d2265nx4vomwra.cloudfront.net/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf')}
+@font-face {font-family: MathJax_Main; src: url('https://d2265nx4vomwra.cloudfront.net/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf'); font-weight: bold}
+@font-face {font-family: MathJax_Main; src: url('https://d2265nx4vomwra.cloudfront.net/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf'); font-style: italic}
+@font-face {font-family: MathJax_Math; src: url('https://d2265nx4vomwra.cloudfront.net/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf'); font-style: italic}
+@font-face {font-family: MathJax_Caligraphic; src: url('https://d2265nx4vomwra.cloudfront.net/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf')}
+@font-face {font-family: MathJax_Size1; src: url('https://d2265nx4vomwra.cloudfront.net/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf')}
+@font-face {font-family: MathJax_Size2; src: url('https://d2265nx4vomwra.cloudfront.net/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf')}
+@font-face {font-family: MathJax_Size3; src: url('https://d2265nx4vomwra.cloudfront.net/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf')}
+@font-face {font-family: MathJax_Size4; src: url('https://d2265nx4vomwra.cloudfront.net/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf')}
+#MathJax_getScales {font-family: MathJax_Main,MathJax_Size1,MathJax_AMS}
+.MathJax .math span {font-family: MathJax_Main,MathJax_Size1,MathJax_AMS}
+</style></head>
+<body class="mediawiki ltr sitedir-ltr ns-518 ns-subject page-ML_Errata_Week_9 action-view skin-cavendish" data-pinterest-extension-installed="cr2.0.5"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+<div id="topbar">
+    <div class="topbar-inner">
+        <div class="container-fluid">
+            <a target="_new" href="http://www.coursera.org/" class="brand">Coursera <span style="background-color:#387690;padding-top:100px" class="label warning">Beta</span></a>
+            <ul class="nav secondary-nav">
+                <li style="padding: 10px 10px 11px; color:#BFBFBF; font-size:14px; border-right: solid 1px #333">Tom Hale </li>
+                <li><a href="https://www.coursera.org/landing/contact.php">Contact Us</a></li>
+                <li><a href="https://share.coursera.org/wiki/index.php/Special:Contributions/3d6475439e09427226cbb8e26ccb8518">
+		             My Contributions</a></li>
+                <li><a href="https://share.coursera.org/wiki/index.php?title=Special:UserLogout&amp;returnto=ML%3AErrata%3A+Week+9">
+		             Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="internal"></div>
+<!-- Skin-Version: 1.2.0 + Coursera -->
+<div id="globalWrapper">
+
+	<div id="p-personal" class="portlet">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+                        			
+			</ul>
+		</div>
+	</div>
+
+	<div id="header">
+		<a name="top" id="contentTop"></a>
+		<h6>
+		<a href="https://share.coursera.org/wiki/index.php/Main_Page" title="Main Page">ML:Errata: Week 9 - Coursera</a></h6>
+		<div id="p-cactions" class="portlet"><ul>
+    
+                 <li id="ca-nstab-ml" class="selected"><a href="https://share.coursera.org/wiki/index.php/ML:Errata:_Week_9">ML</a></li>
+                 <li id="ca-edit"><a href="https://share.coursera.org/wiki/index.php?title=ML:Errata:_Week_9&amp;action=edit" title="You can edit this page. Please use the preview button before saving">Edit</a></li>
+                 <li id="ca-history"><a href="https://share.coursera.org/wiki/index.php?title=ML:Errata:_Week_9&amp;action=history" title="Past revisions of this page">History</a></li>            </ul></div>
+				<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="https://share.coursera.org/wiki/index.php" id="searchform">
+				<input type="hidden" name="title" value="Special:Search">
+				<input type="search" name="search" title="Search Coursera [alt-f]" accesskey="f" id="searchInput">
+				<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton">&nbsp;
+				<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton">
+			</form>
+		</div>
+	</div>
+	</div>
+
+	<div id="mBody">
+	
+		<div id="side">
+			<div id="nav">
+	<div class="generated-sidebar portlet" id="p-Navigation">
+		<h5>Navigation</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage-description"><a href="https://share.coursera.org/wiki/index.php/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li>
+				<li id="n-recentchanges"><a href="https://share.coursera.org/wiki/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+				<li id="n-help"><a href="https://share.coursera.org/wiki/index.php/Help:Editing" title="The place to find out">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="generated-sidebar portlet" id="p-Courses">
+		<h5>Courses</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-List-of-courses"><a href="https://share.coursera.org/wiki/index.php/Courses">List of courses</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="generated-sidebar portlet" id="p-Contribute">
+		<h5>Contribute</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-Video-Subtitles"><a href="https://share.coursera.org/wiki/index.php/Video_Subtitles">Video Subtitles</a></li>
+				<li id="n-Third-party-Tools"><a href="https://share.coursera.org/wiki/index.php/Third-party_Tools">Third-party Tools</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-upload"><a href="https://share.coursera.org/wiki/index.php/Special:Upload" title="Upload files [u]" accesskey="u">Upload file</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+		</div><!-- end of SIDE div -->
+		<div id="column-content">
+			<div id="content"><div id="mw-js-message" class="js-messagebox" style="display: none;"></div>
+				<a id="top"></a>
+	        		        	<h1 id="firstHeading" class="firstHeading">ML:Errata: Week 9</h1>
+				<div id="bodyContent">
+		            <h3 id="siteSub">From Coursera</h3>
+		            <div id="contentSub"></div>
+		            		            		            <div id="jump-to-nav">Jump to: <a href="https://share.coursera.org/wiki/index.php/ML:Errata:_Week_9#column-one">navigation</a>, <a href="https://share.coursera.org/wiki/index.php/ML:Errata:_Week_9#searchInput">search</a></div>					<!-- start content -->
+					<div lang="en" dir="ltr" class="mw-content-ltr"><h1> <span class="mw-headline" id="XV._Anomaly_Detection">XV. Anomaly Detection</span></h1>
+<p>At the risk of being pedantic, it should be noted that <span class="MathJax_Preview" style="display: none;"></span><span class="MathJax" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-8"><span style="display: inline-block; position: relative; width: 1.845em; height: 0px; font-size: 126%;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(1.797em 1000em 3.156em -0.575em);"><span class="mrow" id="MathJax-Span-9"><span class="mi" id="MathJax-Span-10" style="font-family: MathJax_Math; font-style: italic;">p</span><span class="mo" id="MathJax-Span-11" style="font-family: MathJax_Main;">(</span><span class="mi" id="MathJax-Span-12" style="font-family: MathJax_Math; font-style: italic;">x</span><span class="mo" id="MathJax-Span-13" style="font-family: MathJax_Main;">)</span></span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 1.263em; vertical-align: -0.316em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-1">p(x)</script> is not a probability but rather the normalized probability density as parameterized by the feature vector, <span class="MathJax_Preview" style="display: none;"></span><span class="MathJax" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-14"><span style="display: inline-block; position: relative; width: 0.536em; height: 0px; font-size: 126%;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(2.105em 1000em 2.916em -0.501em);"><span class="mrow" id="MathJax-Span-15"><span class="mi" id="MathJax-Span-16" style="font-family: MathJax_Math; font-style: italic;">x</span></span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 0.572em; vertical-align: -0.014em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-2">x</script>; therefore, <span class="MathJax_Preview" style="display: none;"></span><span class="MathJax" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-17"><span style="display: inline-block; position: relative; width: 0.417em; height: 0px; font-size: 126%;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(2.116em 1000em 2.916em -0.497em);"><span class="mrow" id="MathJax-Span-18"><span class="mi" id="MathJax-Span-19" style="font-family: MathJax_Math; font-style: italic;">ϵ</span></span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 0.558em; vertical-align: -0.014em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-3">\epsilon</script> is a threshold condition on the probability density.  Determination of the actual probability would require integration of this density over the appropriate extent of phase space.</p>
+<p>In the <strong>Developing and Evaluating an Anomaly Detection System</strong> video an alternative way for some people to split the data is to use the same data for the cv and test sets, therefore the number of anomalous engines (y = 1) in each set would be <em>20</em> rather than 10 as it states on the slide. </p>
+<p>In the question at 9:58 in the video, the answers all show sigma in the denominator instead of sigma squared.</p>
+<h1> <span class="mw-headline" id="XVI._Recommender_Systems">XVI. Recommender Systems</span></h1>
+<p>In review questions, question 5 in option starting "Recall that the cost function for the content-based recommendation system is" the right side of the formula should be divided by m where m is number of movies. That would mean that the formula will no longer be standard cost function for the content-based recommendation system. However without this change correct answer is marked as incorrect and vice-versa.
+This description is not very clear but being more specific would mean breaking the honour code.</p>
+<hr>
+<p>In the Problem Formulation video the review question states that the no. of movies is <span class="MathJax_Preview" style="display: none;"></span><span class="MathJax" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-20"><span style="display: inline-block; position: relative; width: 1.369em; height: 0px; font-size: 126%;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(2.106em 1000em 3.063em -0.515em);"><span class="mrow" id="MathJax-Span-21"><span class="msubsup" id="MathJax-Span-22"><span style="display: inline-block; position: relative; width: 1.4em; height: 0px;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(2.106em 1000em 2.916em -0.515em);"><span class="mi" id="MathJax-Span-23" style="font-family: MathJax_Math; font-style: italic;">n</span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span><span style="position: absolute; top: -2.576em; left: 0.67em;"><span class="mi" id="MathJax-Span-24" style="font-size: 70.7%; font-family: MathJax_Math; font-style: italic;">m</span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 0.756em; vertical-align: -0.199em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-4">n_m</script>=1. The correct value for <span class="MathJax_Preview" style="display: none;"></span><span class="MathJax" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-25"><span style="display: inline-block; position: relative; width: 1.369em; height: 0px; font-size: 126%;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(2.106em 1000em 3.063em -0.515em);"><span class="mrow" id="MathJax-Span-26"><span class="msubsup" id="MathJax-Span-27"><span style="display: inline-block; position: relative; width: 1.4em; height: 0px;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(2.106em 1000em 2.916em -0.515em);"><span class="mi" id="MathJax-Span-28" style="font-family: MathJax_Math; font-style: italic;">n</span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span><span style="position: absolute; top: -2.576em; left: 0.67em;"><span class="mi" id="MathJax-Span-29" style="font-size: 70.7%; font-family: MathJax_Math; font-style: italic;">m</span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 0.756em; vertical-align: -0.199em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-5">n_m</script>=2.</p>
+<hr>
+<p>In "Collaborative Filtering" video, review question 2: "Which of the following is a correct gradient descent update rule for <span class="MathJax_Preview" style="display: none;"></span><span class="MathJax" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-30"><span style="display: inline-block; position: relative; width: 2.202em; height: 0px; font-size: 126%;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(1.832em 1000em 3.12em -0.515em);"><span class="mrow" id="MathJax-Span-31"><span class="mi" id="MathJax-Span-32" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mo" id="MathJax-Span-33" style="font-family: MathJax_Main; padding-left: 0.278em;">≠</span><span class="mn" id="MathJax-Span-34" style="font-family: MathJax_Main; padding-left: 0.278em;">0</span></span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 1.173em; vertical-align: -0.271em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-6">i \ne 0</script>?"; Instead of <span class="MathJax_Preview" style="display: none;"></span><span class="MathJax" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-35"><span style="display: inline-block; position: relative; width: 2.202em; height: 0px; font-size: 126%;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(1.832em 1000em 3.12em -0.515em);"><span class="mrow" id="MathJax-Span-36"><span class="mi" id="MathJax-Span-37" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mo" id="MathJax-Span-38" style="font-family: MathJax_Main; padding-left: 0.278em;">≠</span><span class="mn" id="MathJax-Span-39" style="font-family: MathJax_Main; padding-left: 0.278em;">0</span></span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 1.173em; vertical-align: -0.271em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-7">i \ne 0</script> it should be <span class="MathJax_Preview" style="display: none;"></span><span class="MathJax" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-40"><span style="display: inline-block; position: relative; width: 2.321em; height: 0px; font-size: 126%;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(1.832em 1000em 3.12em -0.488em);"><span class="mrow" id="MathJax-Span-41"><span class="mi" id="MathJax-Span-42" style="font-family: MathJax_Math; font-style: italic;">k</span><span class="mo" id="MathJax-Span-43" style="font-family: MathJax_Main; padding-left: 0.278em;">≠</span><span class="mn" id="MathJax-Span-44" style="font-family: MathJax_Main; padding-left: 0.278em;">0</span></span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 1.173em; vertical-align: -0.271em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-8">k \ne 0</script>.</p>
+<hr>
+<p>In lesson 5 "Vectorization: Low Rank Matrix Factorization" and in lesson 6 "Implementation detail: Mean normalization" the matrix Y contains a mistake. The element <span class="MathJax_Preview" style="display: none;"></span><span class="MathJax" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-45"><span style="display: inline-block; position: relative; width: 2.202em; height: 0px; font-size: 126%;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(1.607em 1000em 2.904em -0.507em);"><span class="mrow" id="MathJax-Span-46"><span class="msubsup" id="MathJax-Span-47"><span style="display: inline-block; position: relative; width: 2.233em; height: 0px;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(1.865em 1000em 2.904em -0.507em);"><span class="mi" id="MathJax-Span-48" style="font-family: MathJax_Math; font-style: italic;">Y</span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span><span style="position: absolute; top: -3.136em; left: 0.67em;"><span class="texatom" id="MathJax-Span-49"><span class="mrow" id="MathJax-Span-50"><span class="mo" id="MathJax-Span-51" style="font-size: 70.7%; font-family: MathJax_Main;">(</span><span class="mn" id="MathJax-Span-52" style="font-size: 70.7%; font-family: MathJax_Main;">5</span><span class="mo" id="MathJax-Span-53" style="font-size: 70.7%; font-family: MathJax_Main;">,</span><span class="mn" id="MathJax-Span-54" style="font-size: 70.7%; font-family: MathJax_Main;">4</span><span class="mo" id="MathJax-Span-55" style="font-size: 70.7%; font-family: MathJax_Main;">)</span></span></span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 1.184em; vertical-align: 0.001em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-9">Y^{(5,4)}</script> (Dave's opinion on "Sword vs Karate") should be a question mark but is incorrectly given as 0.</p>
+<p>In lesson 6 this mistake is propagated to the calculation of <span class="MathJax_Preview" style="display: none;"></span><span class="MathJax" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-56"><span style="display: inline-block; position: relative; width: 0.595em; height: 0px; font-size: 126%;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(2.105em 1000em 3.121em -0.514em);"><span class="mrow" id="MathJax-Span-57"><span class="mi" id="MathJax-Span-58" style="font-family: MathJax_Math; font-style: italic;">μ</span></span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 0.83em; vertical-align: -0.272em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-10">\mu</script>. When <span class="MathJax_Preview" style="display: none;"></span><span class="MathJax" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-59"><span style="display: inline-block; position: relative; width: 0.595em; height: 0px; font-size: 126%;"><span style="position: absolute; top: -2.726em; left: 0em; clip: rect(2.105em 1000em 3.121em -0.514em);"><span class="mrow" id="MathJax-Span-60"><span class="mi" id="MathJax-Span-61" style="font-family: MathJax_Math; font-style: italic;">μ</span></span><span style="display: inline-block; width: 0px; height: 2.726em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 0.83em; vertical-align: -0.272em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-11">\mu</script> is calculated the 5th movie is given an average rating of 1.25 because (0+0+5+0)/4=1.25, but it should be (0+0+5)/3=1.67. This the affects the new values in the matrix Y.</p>
+<p>In ex8_cofi.m at line 199, where theta is trained using fmincg() for the movie ratings, the use of "Y" in the function call should be "Ynorm".
+Y is normalized in line 181, creating Ynorm, but then it is never used. The video lecture "Implementation Detail: Mean Normalization" at 5:34 makes it pretty clear that the normalized Y matrix should be used for calculating theta. </p>
+<p>In ex8.pdf section 2, "collaborative fitlering" should be "collaborative fi<b>lt</b>ering"</p>
+<p>In ex8.pdf section 2.2.1, “it will later by called” should be “it will later b<b>e</b> called”</p>
+<p>In checkCostFunction.m it prints "If your backpropagation implementation is correct...", but in this exercise there is no backpropagation.</p>
+<p>In the quiz, question 4 has an invalid phrase: "Even if <strong>you</strong> each user has rated only a small fraction of all of your products (so r(i,j)=0 for the vast majority of (i,j) pairs), you can still build a recommender system by using collaborative filtering." The word "you" seems misplaced, "your" or none.</p>
+<p>In the quiz, question 4, one of answer options has a typo "For collaborative filtering, it is possible to use one of the advanced optimization algo<strong>ir</strong>thms"</p>
+<p></p>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 5/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key crowdwiki:pcache:idhash:117-0!*!*!!*!*!* and timestamp 20161123045623 -->
+</div><div class="printfooter">
+Retrieved from "<a href="https://share.coursera.org/wiki/index.php?title=ML:Errata:_Week_9&amp;oldid=34315">https://share.coursera.org/wiki/index.php?title=ML:Errata:_Week_9&amp;oldid=34315</a>"</div>
+					<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="https://share.coursera.org/wiki/index.php/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="https://share.coursera.org/wiki/index.php/Category:ML:Errata" title="Category:ML:Errata">ML:Errata</a></li></ul></div></div>					<!-- end content -->
+									</div>
+			</div><!-- end of MAINCONTENT div -->	
+		</div>
+	
+	</div><!-- end of MBODY div -->
+	<div class="visualClear"></div>
+	<div id="footer">
+		<table style="width:100%;text-align:center;">
+			<tbody><tr>
+				<td rowspan="2" style="width:5%;text-align:center;vertical-align:top;padding-right:1em;white-space:nowrap">
+						</td>
+				<td align="center">
+			<ul id="f-list">
+					<li id="f-lastmod"> This page was last modified on 21 September 2016, at 17:26.</li>
+					<li id="f-viewcount">This page has been accessed 4,598 times.</li>
+					<li id="f-privacy"><a href="https://share.coursera.org/wiki/index.php/Coursera:Privacy_policy" title="Coursera:Privacy policy">Privacy policy</a></li>
+					<li id="f-about"><a href="https://share.coursera.org/wiki/index.php/Coursera:About" title="Coursera:About">About Coursera</a></li>
+					<li id="f-disclaimer"><a href="https://share.coursera.org/wiki/index.php/Coursera:General_disclaimer" title="Coursera:General disclaimer">Disclaimers</a></li>
+</ul></td>
+				<td rowspan="2" style="width:5%;text-align:center;vertical-align:top;padding-left:1em;white-space:nowrap"><div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="./ML_Errata_ Week 9 - Coursera_files/poweredby_mediawiki_88x31.png" height="31" width="88" alt="Powered by MediaWiki"></a></div></td>
+			</tr>
+			<tr>
+				<td><div id="skin-info">
+					Mozilla Cavendish Theme based on Cavendish style by Gabriel Wicke modified by <a href="http://www.dasch-tour.de/" target="_blank">DaSch</a><br>
+					<a href="http://sourceforge.net/projects/wecowi/">Sourceforge Projectpage</a> – <a href="https://sourceforge.net/apps/trac/wecowi/wiki">Bug Reports</a> – Skin-Version: 1.2.0				</div></td>
+			</tr>
+		</tbody></table>
+	</div><!-- end of the FOOTER div -->
+</div><!-- end of the CONTAINER div -->
+<!-- scripts and debugging information -->
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax", "mediawiki.action.watch.ajax"]);
+}
+</script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/load(5).php"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/jquery.checkboxShiftClick.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/jquery.cookie.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/jquery.makeCollapsible.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/jquery.messageBox.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/jquery.mwPrototypes.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/jquery.placeholder.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/mediawiki.action.watch.ajax.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/mediawiki.language.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/mediawiki.user.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/mediawiki.util.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/wikibits.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/ajax.js.download"></script><script type="text/javascript" src="./ML_Errata_ Week 9 - Coursera_files/mediawiki.page.ready.js.download"></script>
+<script src="./ML_Errata_ Week 9 - Coursera_files/MathJax.js.download"></script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails": 0, "cols": 80, "date": "default", "diffonly": 0, "disablemail": 0, "disablesuggest": 0, "editfont": "default", "editondblclick": 0, "editsection": 1, "editsectiononrightclick": 0, "enotifminoredits": 0, "enotifrevealaddr": 0, "enotifusertalkpages": 1, "enotifwatchlistpages": 0, "extendwatchlist": 0, "externaldiff": 0, "externaleditor": 0, "fancysig": 0, "forceeditsummary": 0, "gender": "unknown", "hideminor": 0, "hidepatrolled": 0, "highlightbroken": 1, "imagesize": 2, "justify": 0, "math": 1, "minordefault": 0, "newpageshidepatrolled": 0, "nocache": 0, "noconvertlink": 0, "norollbackdiff": 0, "numberheadings": 0, "previewonfirst": 0, "previewontop": 1, "quickbar": 5, "rcdays": 7, "rclimit": 50, "rememberpassword": 0, "rows": 25, "searchlimit": 20, "showhiddencats": 0, "showjumplinks": 1, "shownumberswatching": 1, "showtoc": 1, "showtoolbar": 1, "skin": "cavendish", "stubthreshold": 0, "thumbsize": 2, "underline": 2, "uselivepreview": 0, "usenewrc": 0, "watchcreations": 0, "watchdefault": 0, "watchdeletion": 0, "watchlistdays": 3, "watchlisthideanons": 0, "watchlisthidebots": 0, "watchlisthideliu": 0, "watchlisthideminor": 0, "watchlisthideown": 0, "watchlisthidepatrolled": 0, "watchmoves": 0, "wllimit": 250, "openid-hide": 0, "openid-update-on-login-nickname": false, "openid-update-on-login-email": false, "openid-update-on-login-fullname": false, "openid-update-on-login-language": false, "openid-update-on-login-timezone": false, "variant": "en", "language": "en", "searchNs0": true, "searchNs1": false, "searchNs2": false, "searchNs3": false, "searchNs4": false, "searchNs5": false, "searchNs6": false, "searchNs7": false, "searchNs8": false, "searchNs9": false, "searchNs10": false, "searchNs11": false, "searchNs12": false, "searchNs13": false, "searchNs14": false, "searchNs15": false, "searchNs500": true, "searchNs502": true, "searchNs504": true, "searchNs506": true, "searchNs508": true, "searchNs510": true, "searchNs512": true, "searchNs514": true, "searchNs516": true, "searchNs518": true});
+	;
+	mw.loader.state({"user.options": "ready"});
+}
+</script><script>if(window.mw){
+	mw.user.tokens.set({"editToken": "27813514caf51936ac560942d36b0ab0+\\", "watchToken": "506e4a4c8f5c034186dbbe623aa6d87a+\\"});
+	;
+	mw.loader.state({"user.tokens": "ready"});
+}
+</script><!-- Served in 0.047 secs. --><span style="border-radius: 2px !important; text-indent: 20px !important; width: auto !important; padding: 0px 4px 0px 0px !important; text-align: center !important; font-style: normal !important; font-variant: normal !important; font-weight: bold !important; font-stretch: normal !important; font-size: 11px !important; line-height: 20px !important; font-family: &quot;Helvetica Neue&quot;, Helvetica, sans-serif !important; color: rgb(255, 255, 255) !important; background: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzBweCIgd2lkdGg9IjMwcHgiIHZpZXdCb3g9Ii0xIC0xIDMxIDMxIj48Zz48cGF0aCBkPSJNMjkuNDQ5LDE0LjY2MiBDMjkuNDQ5LDIyLjcyMiAyMi44NjgsMjkuMjU2IDE0Ljc1LDI5LjI1NiBDNi42MzIsMjkuMjU2IDAuMDUxLDIyLjcyMiAwLjA1MSwxNC42NjIgQzAuMDUxLDYuNjAxIDYuNjMyLDAuMDY3IDE0Ljc1LDAuMDY3IEMyMi44NjgsMC4wNjcgMjkuNDQ5LDYuNjAxIDI5LjQ0OSwxNC42NjIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+PHBhdGggZD0iTTE0LjczMywxLjY4NiBDNy41MTYsMS42ODYgMS42NjUsNy40OTUgMS42NjUsMTQuNjYyIEMxLjY2NSwyMC4xNTkgNS4xMDksMjQuODU0IDkuOTcsMjYuNzQ0IEM5Ljg1NiwyNS43MTggOS43NTMsMjQuMTQzIDEwLjAxNiwyMy4wMjIgQzEwLjI1MywyMi4wMSAxMS41NDgsMTYuNTcyIDExLjU0OCwxNi41NzIgQzExLjU0OCwxNi41NzIgMTEuMTU3LDE1Ljc5NSAxMS4xNTcsMTQuNjQ2IEMxMS4xNTcsMTIuODQyIDEyLjIxMSwxMS40OTUgMTMuNTIyLDExLjQ5NSBDMTQuNjM3LDExLjQ5NSAxNS4xNzUsMTIuMzI2IDE1LjE3NSwxMy4zMjMgQzE1LjE3NSwxNC40MzYgMTQuNDYyLDE2LjEgMTQuMDkzLDE3LjY0MyBDMTMuNzg1LDE4LjkzNSAxNC43NDUsMTkuOTg4IDE2LjAyOCwxOS45ODggQzE4LjM1MSwxOS45ODggMjAuMTM2LDE3LjU1NiAyMC4xMzYsMTQuMDQ2IEMyMC4xMzYsMTAuOTM5IDE3Ljg4OCw4Ljc2NyAxNC42NzgsOC43NjcgQzEwLjk1OSw4Ljc2NyA4Ljc3NywxMS41MzYgOC43NzcsMTQuMzk4IEM4Ljc3NywxNS41MTMgOS4yMSwxNi43MDkgOS43NDksMTcuMzU5IEM5Ljg1NiwxNy40ODggOS44NzIsMTcuNiA5Ljg0LDE3LjczMSBDOS43NDEsMTguMTQxIDkuNTIsMTkuMDIzIDkuNDc3LDE5LjIwMyBDOS40MiwxOS40NCA5LjI4OCwxOS40OTEgOS4wNCwxOS4zNzYgQzcuNDA4LDE4LjYyMiA2LjM4NywxNi4yNTIgNi4zODcsMTQuMzQ5IEM2LjM4NywxMC4yNTYgOS4zODMsNi40OTcgMTUuMDIyLDYuNDk3IEMxOS41NTUsNi40OTcgMjMuMDc4LDkuNzA1IDIzLjA3OCwxMy45OTEgQzIzLjA3OCwxOC40NjMgMjAuMjM5LDIyLjA2MiAxNi4yOTcsMjIuMDYyIEMxNC45NzMsMjIuMDYyIDEzLjcyOCwyMS4zNzkgMTMuMzAyLDIwLjU3MiBDMTMuMzAyLDIwLjU3MiAxMi42NDcsMjMuMDUgMTIuNDg4LDIzLjY1NyBDMTIuMTkzLDI0Ljc4NCAxMS4zOTYsMjYuMTk2IDEwLjg2MywyNy4wNTggQzEyLjA4NiwyNy40MzQgMTMuMzg2LDI3LjYzNyAxNC43MzMsMjcuNjM3IEMyMS45NSwyNy42MzcgMjcuODAxLDIxLjgyOCAyNy44MDEsMTQuNjYyIEMyNy44MDEsNy40OTUgMjEuOTUsMS42ODYgMTQuNzMzLDEuNjg2IiBmaWxsPSIjYmQwODFjIj48L3BhdGg+PC9nPjwvc3ZnPg==&quot;) 3px 50% / 14px 14px no-repeat rgb(189, 8, 28) !important; position: absolute !important; opacity: 1 !important; display: none; cursor: pointer !important; border: none !important; -webkit-font-smoothing: antialiased !important;">Save</span><script aria-hidden="true" type="application/x-lastpass" id="hiddenlpsubmitdiv" style="display: none;"></script><script>try{(function() { for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){ var lastpass_f = document.forms[lastpass_iter]; if(typeof(lastpass_f.lpsubmitorig2)=="undefined"){ lastpass_f.lpsubmitorig2 = lastpass_f.submit; if (typeof(lastpass_f.lpsubmitorig2)=='object'){ continue;}lastpass_f.submit = function(){ var form=this; var customEvent = document.createEvent("Event"); customEvent.initEvent("lpCustomEvent", true, true); var d = document.getElementById("hiddenlpsubmitdiv"); if (d) {for(var i = 0; i < document.forms.length; i++){ if(document.forms[i]==form){ if (typeof(d.innerText) != 'undefined') { d.innerText=i.toString(); } else { d.textContent=i.toString(); } } } d.dispatchEvent(customEvent); }form.lpsubmitorig2(); } } }})()}catch(e){}</script><div style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: MathJax_Main, sans-serif;"></div></body><div></div></html>
