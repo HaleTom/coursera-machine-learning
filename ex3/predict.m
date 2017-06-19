@@ -21,11 +21,18 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+m = rows(X);
+
 % Add intercept term to training set
-X = [ones(size(X,1),1) X];
+X = [ones(m,1) X];
+
+% size(X) == 5000 * 401 -- 5000 examples, 400 features
+% size(Theta1) == 25 x 401  -- 25 nodes in hidden layer
+% size(A1) == 5000 x 26  -- 25 hidden nodes + 1 bias
+% size(Theta2) == 10 x 26 -- 10 class output
 
 A1 = sigmoid(X * Theta1');
-A1 = [ones(size(X,1), 1) A1];
+A1 = [ones(m, 1) A1];
 
 A2 = sigmoid(A1 * Theta2');
 
