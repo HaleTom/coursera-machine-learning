@@ -237,9 +237,12 @@ $$\displaystyle \min_\theta\ \dfrac{1}{2m}\  \sum_{i=1}^m (h_\theta(x^{(i)}) - y
 
 The weighted terms will need to $ \approx 0$ for the function as a whole to be minimised.
 
-Generally, smaller values for $\theta_j$ will lead to a "simpler", smoother hypothesis, less prone to overfitting, given by:
+Generally, smaller values for $\theta_j$ will lead to a "simpler", smoother hypothesis, less prone to overfitting.
 
-$$\min_\theta\ \dfrac{1}{2m}\  \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \left[ \lambda\ \sum_{j=1}^n \theta_j^2 \right]$$
+Regularisation is achieved by adding the term:
+
+$$J^+(\theta) = J(\theta) + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2$$
+<!-- $$J^+(\theta) = J(\theta) + \dfrac{1}{2m}\  \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \left[ \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2 \right]$$ -->
 
 This will encourage having fewer features, as adding a feature (non-zero $\theta_j$) will incur a cost.
 

@@ -152,28 +152,4 @@ $$\begin{align*}\begin{bmatrix}x_0 \newline x_1 \newline x_2 \newline\cdots \new
 
 ![Multiclass Classification](wk4-multiclass-classification.png)
 
-
-
 [//]: #speeling (check)
-
-
-# Pomodoros
-## Monday
-1. Close down Wk3, setup Wk4
-1. Video: non-linear hypothesis 
-1. Neurons and the brain
-1. 8 minutes of Model representation
-## Tuesday
-1. Understand $\Theta$, 7 minutes.
-1. 6 min to Model II 9:11
-
-## Thursday
-1. Revision
-1. Revision
-1. DisplayDecisionBoundry understanding
-1. Wrap up loose ends wk3
-
-Paypal from agama?
-Phone space
-
-Buy Etherium. 2000
