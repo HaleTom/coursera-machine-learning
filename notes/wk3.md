@@ -88,6 +88,11 @@ J(\theta) &= \dfrac{1}{m} \sum_{i=1}^m \mathrm{Cost}(h_\theta(x^{(i)}),y^{(i)}) 
   \end{cases}
 \end{align*}$$
 
+$$ \begin{align*}& \mathrm{Cost}(h_\theta(x),y) = 0 &&\text{ if } h_\theta(x) = y \\
+& \mathrm{Cost}(h_\theta(x),y) \rightarrow \infty &&\text{ if } y = 0 \; \mathrm{and} \; h_\theta(x) \rightarrow 1 \\
+& \mathrm{Cost}(h_\theta(x),y) \rightarrow \infty &&\text{ if } y = 1 \; \mathrm{and} \; h_\theta(x) \rightarrow 0 \newline
+\end{align*}$$
+
 This uses *maximum likilihood estimation* from statistics.
 
 If $y=1$:
@@ -116,11 +121,6 @@ Vectorised:
 $$\begin{align*}
   h &= g(X\theta)\\
   J(\theta) &= \frac{1}{m} \left(-y^{T}\log(h) - (1-y)^{T}\log(1-h)\right) \end{align*}$$
-
-$$ \begin{align*}& \mathrm{Cost}(h_\theta(x),y) = 0 &&\text{ if } h_\theta(x) = y \\
-& \mathrm{Cost}(h_\theta(x),y) \rightarrow \infty &&\text{ if } y = 0 \; \mathrm{and} \; h_\theta(x) \rightarrow 1 \\
-& \mathrm{Cost}(h_\theta(x),y) \rightarrow \infty &&\text{ if } y = 1 \; \mathrm{and} \; h_\theta(x) \rightarrow 0 \newline
-\end{align*}$$
 
 ## Gradient descent
 
@@ -158,7 +158,7 @@ Advantages:
 * Converge much faster than gradient descent (generally)
 
 Disadvantage:
-* Complex (don't implment unless versed in advanced numerical methods)
+* Complex (don't implement unless versed in advanced numerical methods)
 
 All of these (and gradient decent) require functions which give:
  * $J(\theta)$
@@ -242,11 +242,10 @@ Generally, smaller values for $\theta_j$ will lead to a "simpler", smoother hypo
 Regularisation is achieved by adding the term:
 
 $$J^+(\theta) = J(\theta) + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2$$
-<!-- $$J^+(\theta) = J(\theta) + \dfrac{1}{2m}\  \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 + \left[ \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2 \right]$$ -->
+
+Where $\lambda$ is the regularisation parameter, determining the $\theta_j$ parameter cost inflation. [Why multiply by 1/2m?](https://stats.stackexchange.com/questions/287920/regularisation-why-multiply-by-1-2m )
 
 This will encourage having fewer features, as adding a feature (non-zero $\theta_j$) will incur a cost.
-
-Where $\lambda$ is the regularisation parameter, determining the $\theta_j$ parameter cost inflation.
 
 By convention, regularisation is not applied to the intercept term $j=0$.
 

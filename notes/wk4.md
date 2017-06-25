@@ -61,7 +61,7 @@ $\begin{bmatrix}x_0 \newline x_1 \newline x_2 \newline \end{bmatrix}\rightarrow\
 
 Sometimes a *bias unit* or *bias neuron* $x_0 = 1$ is drawn when useful.
 
-NN neurons use the same function as logistic regression, but it's called a *sigmoid (logistic) activation function*.
+NN neurons use the same function as logistic regression, but it's called a *sigmoid (logistic) **activation** function*.
 
 Instead of calling $\theta$ the parameters, it is sometimes called the model's *weights*.
 
@@ -113,7 +113,7 @@ Forward propagation takes the input layer and sequentially applies the weighted 
 
 Think of each layer as a matrix: a list of nodes (rows). Think of each node as being an (input-layer-numbered) $\theta$ which combines (weighted sum) its inputs as: $\theta^T a^{(j-1)}$, and outputs the sigmoid.
 
-The last unit may be a simple logistic regression, combining the inputs and outputting $\mathrm{sigmoid}(\theta^T a^{(j-1)})$.
+The last unit may be a simple logistic regression, summing the weighted inputs and outputting $\mathrm{sigmoid}(\theta^T a^{(j-1)})$.
 
 The hidden layers elegantly calculate interesting combinations of features, allowing complex, non-linear hypotheses. Later layers calculate more complex functions.
 
