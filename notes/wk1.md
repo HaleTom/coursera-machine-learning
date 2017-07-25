@@ -19,6 +19,7 @@ https://github.com/hangtwenty/dive-into-machine-learning )
 
 * [Holehouse lecture notes](http://www.holehouse.org/mlclass/ )
 * [Chris McCormick's notes (search "02 Apr 2013")](http://mccormickml.com/archive/ )
+* [Reddit](https://www.reddit.com/r/mlclass/)
 
 ### Maths
 * [Khan Academy has excellent Linear Algebra Tutorials](https://www.khanacademy.org/#linear-algebra )
@@ -157,10 +158,6 @@ This function is also called the "Mean Squared Error". The $ \frac 1 2$ is cance
 * [Wikipedia Differentiation rules](https://en.wikipedia.org/wiki/Differentiation_rules )
 
 Notation: Partial derivative: $\partial$, derivative: $d$.
-
-Derivative with only one feature:
-$$\begin{align}\frac{\partial}{\partial\theta_0} J &= \frac{1}{m} \sum_{i=1}^m \left(h_\theta(x^{(i)})-y^{(i)}\right)\\
-\frac{\partial}{\partial\theta_1} J &= \frac{1}{m} \sum_{i=1}^m \left(h_\theta(x^{(i)})-y^{(i)}\right) x^{(i)}\end{align}$$
 
 Derivative with $n \ge 1$ features ($x_0^{(i)} = 1$):
 
