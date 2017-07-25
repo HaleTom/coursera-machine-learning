@@ -21,24 +21,26 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
-m = rows(X);
 
-% Add intercept term to training set
-X = [ones(m,1) X];
+allTheta{1} = Theta1;
+allTheta{2} = Theta2;
 
 % size(X) == 5000 * 401 -- 5000 examples, 400 features
 % size(Theta1) == 25 x 401  -- 25 nodes in hidden layer
 % size(A1) == 5000 x 26  -- 25 hidden nodes + 1 bias
 % size(Theta2) == 10 x 26 -- 10 class output
 
-A1 = sigmoid(X * Theta1');
-A1 = [ones(m, 1) A1];
+activation{1} = X; % Input layer
 
-p = sigmoid(A1 * Theta2');
+for Theta = 1:size(allTheta,2) % Cell array layout is like row vector
+% Add bias node
+	activation{Theta} = [ones(rows(activation{Theta}), 1) activation{Theta}];
 
-% [_, p] = max(A2, [], 2);
+	activation{Theta + 1} = sigmoid(activation{Theta} * allTheta{Theta}');
+end
+
+p = activation{end};
 
 % =========================================================================
-
 
 end
