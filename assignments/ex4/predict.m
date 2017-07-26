@@ -1,4 +1,4 @@
-function p = predict(Theta1, Theta2, X)
+function [p, activation] = predict(Theta1, Theta2, X)
 %PREDICT Predict the label of an input given a trained neural network
 %   p = PREDICT(Theta1, Theta2, X) outputs the predicted output layer activation
 %   trained weights of a neural network (Theta1, Theta2)
@@ -34,9 +34,9 @@ activation{1} = X; % Input layer
 
 for Theta = 1:size(allTheta,2) % Cell array layout is like row vector
 % Add bias node
-	activation{Theta} = [ones(rows(activation{Theta}), 1) activation{Theta}];
+	bias_added = [ones(rows(activation{Theta}), 1) activation{Theta}];
 
-	activation{Theta + 1} = sigmoid(activation{Theta} * allTheta{Theta}');
+	activation{Theta + 1} = sigmoid(bias_added * allTheta{Theta}');
 end
 
 p = activation{end};

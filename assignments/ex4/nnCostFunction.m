@@ -57,23 +57,101 @@ for i = 1:length(y)
 end
 y = yOutput;
 
+%
 % Compute cost (J)
+%
 hX = predict(Theta1, Theta2, X);
 J = 1/m * (-y .* log(hX) - (1 - y) .* log(1 - hX));
 J = sum(sum(J));
 
 % Add regularisation
-for layer = 1:rows(allTheta) % Layers
-  Theta = allTheta{layer};
+for i = 1:rows(allTheta) % Layers
+  Theta = allTheta{i};
   Theta(:,1) = zeros(rows(Theta), 1); % Zero bias terms
 
   squaredSum = sum(sum(Theta .* Theta));
   J += lambda / 2 / m * squaredSum;
 end
 
-% Unroll gradients
-grad = [Theta1_grad(:) ; Theta2_grad(:)];
+%
+% Compute gradients via backpropagation
+%
 
+% Inintialise Thetas via Normalised Initialisation
+% https://stats.stackexchange.com/questions/291777/why-is-sqrt6-used-to-calculate-epsilon-for-random-initialisation-of-neural-net
+for i = 1:length(allTheta)
+  % randInitializeWeights assumes no bias nodes, hence the -1:
+  allTheta{i} = randInitializeWeights(columns(allTheta{i})-1, rows(allTheta{i}));
+end
+
+% Get predictions for all training examples based on randomised Thetas
+[hX, activation] = predict(Theta1, Theta2, X);
+
+% printf("size(activation)\n")
+% size(activation)
+
+layers = 1 + length(allTheta);
+
+% Get error in output layer
+delta{layers} = activation{layers} - y;
+
+% Get error in hidden layer(s)
+for layer = layers-1:-1:2 % Step downward by -1 to first hidden layer
+  % printf("Layer: %d\n", layer);
+  % printf("size(activation{layer})\n")
+  % size(activation{layer})
+  delta{layer} = (delta{layer+1} * allTheta{layer})(:,2:end);
+  % delta{layer} = (delta{layer+1} * allTheta{layer});
+  % printf("size(delta{layer})\n")
+  % size(delta{layer})
+  % printf("size(activation{layer} .* (1 - activation{layer}))") % RUNME!
+  % size(activation{layer} .* (1 - activation{layer}))
+  delta{layer} .*= activation{layer} .* (1 - activation{layer});
+  % delta{layer} .*= activation{layer} .* (1 - activation{layer});
+  % printf("size(delta{layer})\n")
+  % size(delta{layer})
+  % XXX remove delta for bias... any differences?
+  % printf("Delta{layer} = delta{layer+1} * activations{layer}'\n")
+  % Delta{layer} = delta{layer+1} * activation{layer}'
+end
+
+% Calculate Delta. Note capital 'D'
+for layer = layers-1:-1:1 % For each Theta matrix
+  % Initialise Delta
+  Delta{layer} = zeros(rows(allTheta{layer}), columns(allTheta{layer}));
+  printf("size(Delta{%d})", layer);
+  size(Delta{layer})
+  for t = 1:m
+    Delta{layer} = Delta{layer} + delta{layer+1}(t,:)' * [1 activation{layer}(t,:)];
+  end
+  % Add normalisation
+  allTheta{layer}(:,1) = zeros(rows(allTheta{layer}), 1); % zero bias terms
+  Delta{layer} = 1/m * (Delta{layer} + lambda * allTheta{layer});
+end
+
+% printf("Test\n")
+% size(Delta{2})
+% Delta{2}(1:10, :)
+
+% Theta1_grad = zeros(size(Theta1));
+% Theta2_grad = zeros(size(Theta2));
+%
+
+% printf("sizes\n")
+% size(Theta1)
+% size(Delta{1})
+% size(Theta2)
+% size(Delta{2})
+% printf("-------end--------\n")
+
+% Unroll gradients
+grad=[];
+for i = 1:length(Delta)
+  % printf("size(Delta{i})")
+  % size(Delta{i})
+  grad = [grad; Delta{i}(:)];
+end
+% grad
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
@@ -97,24 +175,6 @@ grad = [Theta1_grad(:) ; Theta2_grad(:)];
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 % -------------------------------------------------------------
 
