@@ -83,127 +83,43 @@ end
 
 % Inintialise Thetas via Normalised Initialisation
 % https://stats.stackexchange.com/questions/291777/why-is-sqrt6-used-to-calculate-epsilon-for-random-initialisation-of-neural-net
-layers = 1 + length(allTheta);
-
-for i = 1:layers - 1
-  % randInitializeWeights assumes no bias nodes, hence the -1:
+for i = 1:length(allTheta)
   allTheta{i} = randInitializeWeights(columns(allTheta{i})-1, rows(allTheta{i}));
 end
 
-% Get predictions for all training examples based on randomised Thetas
-[hX, activation] = predict(Theta1, Theta2, X);
+% Get activations of all layers
+[_, activation] = predict(Theta1, Theta2, X);
 
-% ===== loop over training examples ==========
-  Delta{2} = zeros(rows(allTheta{2}), columns(allTheta{2}));
-  Delta{1} = zeros(rows(allTheta{1}), columns(allTheta{1}));
-for t = 1:m
-  [hX, activation] = predict(Theta1, Theta2, X(t,:));
-  delta{layers} = (activation{layers} - y(t,:))'; % Was previously vectorised
-  for layer = layers-1:-1:2 % Step downward by -1 to first hidden layer
-    % printf("Layer: %d\n", layer);
+% Get error of output layer
+layers = 1 + length(allTheta);
+d{layers} = activation{layers} - y;
 
-    % printf("size(delta{layer+1})\n")
-    % size(delta{layer+1})
-    % printf("size(activation{layer}')\n")
-    % size(activation{layer}')
-    delta{layer} = (allTheta{layer}' * delta{layer+1})(2:end);
-    % printf("size(delta{layer})\n")
-    % size(delta{layer})
-    delta{layer} .*= activation{layer}' .* (1 - activation{layer}');
-    % delta{layer} = allTheta{layer}' * delta{layer+1} .* activation{layer}' .* (1 - activation{layer}')
-
-
-    % size(activation{layer})
-    % delta{layer} = (delta{layer+1} * allTheta{layer})(:,2:end);
-    % delta{layer} = (delta{layer+1} * allTheta{layer});
-    % printf("size(delta{layer})\n")
-    % size(delta{layer})
-    % printf("size(activation{layer} .* (1 - activation{layer}))") % RUNME!
-    % size(activation{layer} .* (1 - activation{layer}))
-    % delta{layer} .*= activation{layer} .* (1 - activation{layer});
-
-    Delta{layer} = Delta{layer} + delta{layer+1} * [1 activation{layer}];
-    % printf("size(Delta{%d})", layer);
-    % size(Delta{layer})
-  end
+% Work back through the layers
+for layer = layers-1 : -1 : 2
+  d{layer} = d{layer+1} * allTheta{layer};
+  describe d{layer} d{layer+1} allTheta{layer};
+  d{layer} = d{layer}(:, 2:end); % Removed error for bias term
+  d{layer} .*= activation{layer} .* (1 - activation{layer});
 end
 
+% Zero Theta bias weights for later regularisation
+for layer = 1:length(allTheta)
+  allTheta{layer}(:,1) = ones(rows(allTheta{layer}), 1);
+end
 
-for layer = 1:length(Delta)
-  % printf("size(Delta{layer}\n")
-  % size(Delta{layer})
-  allTheta{layer}(:,1) = zeros(rows(allTheta{layer}), 1); % zero bias terms
-  allTheta{layer}(:,1) = 0; % zero bias terms
+% Calculate Deltas
+for layer = 1:layers-1
+  % Create empty Delta as accumulator
+  Delta{layer} = zeros(size(allTheta{layer}));
+  % Delta{layer} = zeros(columns(activation{layer+1}), columns(activation{layer}) + 1);
+  for i = 1:m
+    Delta{layer} += d{layer+1}(i,:)' .* [1 activation{layer}(i,:)];
+  end
+
   Delta{layer} = 1/m * (Delta{layer} + lambda * allTheta{layer});
-  % Delta{layer} /= m;
+
+  % describe Delta{layer}
 end
-
-% printf("size(activation)\n")
-% size(activation)
-%
-grad=[];
-for i = 1:length(Delta)
-  % printf("size(Delta{i})")
-  % size(Delta{i})
-  grad = [grad; Delta{i}(:)];
-end
-return
-printf("ERROR")
-pause
-% ------------------------
-
-% Get error in output layer
-delta{layers} = activation{layers} - y;
-
-% Get error in hidden layer(s)
-for layer = layers-1:-1:2 % Step downward by -1 to first hidden layer
-  % printf("Layer: %d\n", layer);
-  % printf("size(activation{layer})\n")
-  % size(activation{layer})
-  delta{layer} = (delta{layer+1} * allTheta{layer})(:,2:end);
-  % delta{layer} = (delta{layer+1} * allTheta{layer});
-  % printf("size(delta{layer})\n")
-  % size(delta{layer})
-  % printf("size(activation{layer} .* (1 - activation{layer}))") % RUNME!
-  % size(activation{layer} .* (1 - activation{layer}))
-  delta{layer} .*= activation{layer} .* (1 - activation{layer});
-  % delta{layer} .*= activation{layer} .* (1 - activation{layer});
-  % printf("size(delta{layer})\n")
-  % size(delta{layer})
-  % XXX remove delta for bias... any differences?
-  % printf("Delta{layer} = delta{layer+1} * activations{layer}'\n")
-  % Delta{layer} = delta{layer+1} * activation{layer}'
-end
-
-% Calculate Delta. Note capital 'D'
-for layer = layers-1:-1:1 % For each Theta matrix
-  % Initialise Delta
-  Delta{layer} = zeros(rows(allTheta{layer}), columns(allTheta{layer}));
-  % printf("size(Delta{%d})", layer);
-  % size(Delta{layer})
-  for t = 1:m
-    Delta{layer} = Delta{layer} + delta{layer+1}(t,:)' * [1 activation{layer}(t,:)];
-  end
-  % Add regularisation
-  % allTheta{layer}(:,1) = zeros(rows(allTheta{layer}), 1); % zero bias terms
-  % Delta{layer} = 1/m * (Delta{layer} + lambda * allTheta{layer});
-  Delta{layer} = 1/m * (Delta{layer});
-end
-
-% printf("Test\n")
-% size(Delta{2})
-% Delta{2}(1:10, :)
-
-% Theta1_grad = zeros(size(Theta1));
-% Theta2_grad = zeros(size(Theta2));
-%
-
-% printf("sizes\n")
-% size(Theta1)
-% size(Delta{1})
-% size(Theta2)
-% size(Delta{2})
-% printf("-------end--------\n")
 
 % Unroll gradients
 grad=[];
@@ -211,8 +127,9 @@ for i = 1:length(Delta)
   % printf("size(Delta{i})")
   % size(Delta{i})
   grad = [grad; Delta{i}(:)];
+  % describe grad
+  % describe Delta{i}
 end
-% grad
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
