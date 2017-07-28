@@ -39,13 +39,14 @@ Theta2_grad = zeros(size(Theta2));
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
 
-allTheta={Theta1; Theta2}; % Create array of all Theta parameters
+% Allow arbitrary network architectures. Create cell array of all Theta parameters
+Theta={Theta1; Theta2};
 
 % Transform y from integers in 1:10 into vectors which would be returned by the
 % output layer
-yOutput = zeros(length(y), rows(allTheta{end}));
+yOutput = zeros(length(y), rows(Theta{end}));
 
-K = rows(Theta2); % Number of classes
+K = rows(Theta{end}); % Number of classes
 
 for i = 1:length(y)
   % Expect integers from 1:
@@ -55,26 +56,22 @@ for i = 1:length(y)
   end
   yOutput(i, y(i)) = 1;
   % Or, faster (but no validation):
-  % yv=[1:num_labels] == y
+  % yv=[1:num_labels] == y % Use Broadcasting
   % Or
   % yv = bsxfun(@eq, y, 1:num_labels);
 end
 y = yOutput;
 
 %
-% Compute cost (J)
+% Compute unregularised cost (J)
 %
 hX = predict(Theta1, Theta2, X);
-J = 1/m * (-y .* log(hX) - (1 - y) .* log(1 - hX));
-J = sum(sum(J));
+J = 1/m * sum(sum((-y .* log(hX) - (1 - y) .* log(1 - hX))));
 
 % Add regularisation
-for i = 1:rows(allTheta) % Layers
-  Theta = allTheta{i};
-  Theta(:,1) = zeros(rows(Theta), 1); % Zero bias terms
-
-  squaredSum = sum(sum(Theta .* Theta));
-  J += lambda / 2 / m * squaredSum;
+for i = 1:length(Theta)
+  Theta{i}(:,1) = zeros(rows(Theta{i}), 1); % Zero bias terms
+  J += lambda / 2 / m * sum(sum(Theta{i} .* Theta{i}));
 end
 
 %
@@ -83,52 +80,142 @@ end
 
 % Inintialise Thetas via Normalised Initialisation
 % https://stats.stackexchange.com/questions/291777/why-is-sqrt6-used-to-calculate-epsilon-for-random-initialisation-of-neural-net
-for i = 1:length(allTheta)
-  allTheta{i} = randInitializeWeights(columns(allTheta{i})-1, rows(allTheta{i}));
+for i = 1:length(Theta)
+  Theta{i} = randInitializeWeights(columns(Theta{i})-1, rows(Theta{i}));
 end
 
-% Get activations of all layers
-[_, activation] = predict(Theta1, Theta2, X);
 
-% Get error of output layer
-layers = 1 + length(allTheta);
-d{layers} = activation{layers} - y;
 
-% Work back through the layers
-for layer = layers-1 : -1 : 2
-  d{layer} = d{layer+1} * allTheta{layer};
-  describe d{layer} d{layer+1} allTheta{layer};
-  d{layer} = d{layer}(:, 2:end); % Removed error for bias term
-  d{layer} .*= activation{layer} .* (1 - activation{layer});
-end
+%----------------------
 
-% Zero Theta bias weights for later regularisation
-for layer = 1:length(allTheta)
-  allTheta{layer}(:,1) = ones(rows(allTheta{layer}), 1);
-end
+[Theta1, Theta2] = Theta{1:2};
+Theta1 = Theta{1};
+Theta2 = Theta{2};
 
-% Calculate Deltas
-for layer = 1:layers-1
-  % Create empty Delta as accumulator
-  Delta{layer} = zeros(size(allTheta{layer}));
-  % Delta{layer} = zeros(columns(activation{layer+1}), columns(activation{layer}) + 1);
-  for i = 1:m
-    Delta{layer} += d{layer+1}(i,:)' .* [1 activation{layer}(i,:)];
+yy = y;
+oldX = X;
+X = [ones(m,1) X];
+for t=1:m
+  % forward pass
+  a1 = X(t,:);
+  z2 = Theta1*a1';
+  a2 = [1; sigmoid(z2)];
+  z3 = Theta2*a2;
+  a3 = sigmoid(z3);
+
+  % backprop
+  delta3 = a3-yy(t,:)';
+  delta2 = (Theta2'*delta3).*[1; sigmoidGradient(z2)];
+  delta2 = delta2(2:end);
+
+% DEBUG
+  if t == 1500
+    delta2_test = delta2;
+    % describe delta2_1
   end
 
-  Delta{layer} = 1/m * (Delta{layer} + lambda * allTheta{layer});
+  Theta1_grad = Theta1_grad + delta2*a1;
+  % describe Theta1_grad delta2 a1;
+  Theta2_grad = Theta2_grad + delta3*a2';
+  % describe Theta2_grad delta3 a2;
+end
 
-  % describe Delta{layer}
+Theta1_grad = (1/m)*Theta1_grad+(lambda/m)*[zeros(size(Theta1, 1), 1) Theta1(:,2:end)];
+Theta2_grad = (1/m)*Theta2_grad+(lambda/m)*[zeros(size(Theta2, 1), 1) Theta2(:,2:end)];
+
+% Unroll gradients
+grad = [Theta1_grad(:) ; Theta2_grad(:)];
+X = oldX;
+
+% return
+
+% ------------------------
+
+% Get Z (non-activated output) of all neurons in network
+[hX, Z] = predict(Theta1, Theta2, X);
+
+% Get error of output layer
+layers = 1 + length(Theta);
+d{layers} = hX - y;
+
+%   % backprop
+%   delta3 = a3-yy(t,:)';
+%   delta2 = (Theta2'*delta3).*[1; sigmoidGradient(z2)];
+%   delta2 = delta2(2:end);
+
+% Propagate errors backwards through hidden layers
+for layer = layers-1 : -1 : 2
+  d{layer} = d{layer+1} * Theta{layer};
+  d{layer} = d{layer}(:, 2:end); % Remove "error" for constant bias term
+  d{layer} .*= sigmoidGradient(Z{layer});
+  % d{layer} .*= sigmoidGradient([ones(m,1) Z{layer}]);
+  % describe layer Theta{layer} d{layer+1} sigmoid(Z{layer}) d{layer};
+end
+
+% delta2s are EQUAL.
+% disp( delta2_test - d{2}(1500,:)')
+% describe delta2_1
+% disp(delta2_1)
+% describe d{2}(1,:)
+% disp(d{2}(1,:)')
+% ----- end delta2 EQUAL --------
+
+% "Theta1_grad" is a matrix of size [25 401]
+% "delta2" is a matrix of size [25 1]
+% "a1" is a matrix of size [1 401]
+%
+% "Theta2_grad" is a matrix of size [10 26]
+% "delta3" is a matrix of size [10 1]
+% "a2" is a matrix of size [26 1]%
+
+% "layer" is a double = 2
+% "Theta{layer}" is a matrix of size [10 26]
+% "d{layer+1}" is a matrix of size [5000 10]
+% "sigmoid(Z{layer})" is a matrix of size [5000 25]
+%
+% "layer" is a double = 1
+% "Delta{layer}" is a matrix of size [25 401]
+% "d{layer+1}" is a matrix of size [5000 25]
+% "sigmoid(Z{layer})" is a matrix of size [5000 400]
+
+%%%%%%%%
+  Theta1_grad = Theta1_grad + delta2*a1;
+  Theta2_grad = Theta2_grad + delta3*a2';
+%%%%%%%%
+
+
+% Zero Theta bias weights for later regularisation
+for layer = 1:length(Theta)
+  Theta{layer}(:,1) = ones(rows(Theta{layer}), 1);
+end
+
+% Calculate Theta gradients
+for layer = 1:layers-1
+  % Create empty grad_Theta as accumulator
+  grad_Theta{layer} = zeros(size(Theta{layer}));
+  % describe z{layer}
+  for i = 1:m
+    % grad_Theta{layer} += d{layer+1}(i,:)' * sigmoid([1 Z{layer}(i,:)]); % Outer product
+    grad_Theta{layer} += d{layer+1}(i,:)' * ([1 Z{layer}(i,:)]); % Outer product
+  end
+  % describe Z{layer}(m,:);
+  % disp ([1 Z{layer}(m,:)]);
+
+  grad_Theta{layer} = 1/m * (grad_Theta{layer});
+  % grad_Theta{layer} = 1/m * (grad_Theta{layer} + lambda * Theta{layer});
+
+  describe layer grad_Theta{layer} d{layer+1} sigmoid(Z{layer})
+  % describe grad_Theta{layer}
 end
 
 % Unroll gradients
 grad=[];
-for i = 1:length(Delta)
-  % printf("size(Delta{i})")
-  % size(Delta{i})
-  grad = [grad; Delta{i}(:)];
+for i = 1:length(grad_Theta)
+  % printf("size(grad_Theta{i})")
+  % size(grad_Theta{i})
+  grad = [grad; grad_Theta{i}(:)];
   % describe grad
-  % describe Delta{i}
+  % describe grad_Theta{i}
 end
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
