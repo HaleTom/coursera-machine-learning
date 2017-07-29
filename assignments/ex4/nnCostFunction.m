@@ -26,9 +26,9 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
 m = size(X, 1);
          
 % You need to return the following variables correctly 
-J = 0;
-Theta1_grad = zeros(size(Theta1));
-Theta2_grad = zeros(size(Theta2));
+% J = 0;
+% Theta1_grad = zeros(size(Theta1));
+% Theta2_grad = zeros(size(Theta2));
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
@@ -65,6 +65,10 @@ y = yOutput;
 %
 % Compute unregularised cost (J)
 %
+
+% Get h(X) and z (non-activated output of all neurons in network)
+[hX, z, activation] = predict(Theta1, Theta2, X);
+
 hX = predict(Theta1, Theta2, X);
 J = 1/m * sum(sum((-y .* log(hX) - (1 - y) .* log(1 - hX))));
 
@@ -77,9 +81,6 @@ end
 % Compute gradients via backpropagation
 %
 
-% Get Z (non-activated output) of all neurons in network
-[hX, Z] = predict(Theta1, Theta2, X);
-
 % Get error of output layer
 layers = 1 + length(Theta);
 d{layers} = hX - y;
@@ -88,103 +89,28 @@ d{layers} = hX - y;
 for layer = layers-1 : -1 : 2
   d{layer} = d{layer+1} * Theta{layer};
   d{layer} = d{layer}(:, 2:end); % Remove "error" for constant bias term
-  d{layer} .*= sigmoidGradient(Z{layer});
+  d{layer} .*= sigmoidGradient(z{layer});
 end
-
-% --------------------------------------------------------------------------
-yy = y;
-oldX = X;
-X = [ones(m,1) X];
-
-%----------------------
-
-[Theta1, Theta2] = Theta{1:2};
-
-t=1;
-for t=1:m
-  % forward pass
-  a1 = X(t,:);
-  z2 = Theta1*a1';
-  a2 = [1; sigmoid(z2)];
-  z3 = Theta2*a2;
-  a3 = sigmoid(z3);
-
-delta3 = d{3}(t,:)';
-delta2 = d{2}(t,:)';
-
-% d2_ok = zeros(m, columns(Theta2)-1);
-
-  Theta1_grad = Theta1_grad + delta2*a1;
-  Theta2_grad = Theta2_grad + delta3*a2';
-end
-
-Theta1_grad = (1/m)*Theta1_grad+(lambda/m)*[zeros(size(Theta1, 1), 1) Theta1(:,2:end)];
-Theta2_grad = (1/m)*Theta2_grad+(lambda/m)*[zeros(size(Theta2, 1), 1) Theta2(:,2:end)];
-
-% Unroll gradients
-grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
-% ------------------------
-return
-X = oldX;
-
-% "Theta1_grad" is a matrix of size [25 401]
-% "delta2" is a matrix of size [25 1]
-% "a1" is a matrix of size [1 401]
-%
-% "Theta2_grad" is a matrix of size [10 26]
-% "delta3" is a matrix of size [10 1]
-% "a2" is a matrix of size [26 1]%
-
-% "layer" is a double = 2
-% "Theta{layer}" is a matrix of size [10 26]
-% "d{layer+1}" is a matrix of size [5000 10]
-% "sigmoid(Z{layer})" is a matrix of size [5000 25]
-%
-% "layer" is a double = 1
-% "Delta{layer}" is a matrix of size [25 401]
-% "d{layer+1}" is a matrix of size [5000 25]
-% "sigmoid(Z{layer})" is a matrix of size [5000 400]
-
-%%%%%%%%
-  % Theta1_grad = Theta1_grad + delta2*a1;
-  % Theta2_grad = Theta2_grad + delta3*a2';
-%%%%%%%%
-
-
-% % Zero Theta bias weights for later regularisation
-% for layer = 1:length(Theta)
-%   Theta{layer}(:,1) = ones(rows(Theta{layer}), 1);
-% end
 
 % Calculate Theta gradients
-for layer = 1:layers-1
-  % Create empty grad_Theta as accumulator
-  grad_Theta{layer} = zeros(size(Theta{layer}));
-  % describe z{layer}
-  for i = 1:m
-    % grad_Theta{layer} += d{layer+1}(i,:)' * sigmoid([1 Z{layer}(i,:)]); % Outer product
-    grad_Theta{layer} += d{layer+1}(i,:)' * ([1 Z{layer}(i,:)]); % Outer product
-  end
-  % describe Z{layer}(m,:);
-  % disp ([1 Z{layer}(m,:)]);
+for l = 1:layers-1
+  Theta_grad{l} = zeros(size(Theta{l}));
 
-  grad_Theta{layer} = 1/m * (grad_Theta{layer});
-  % grad_Theta{layer} = 1/m * (grad_Theta{layer} + lambda * Theta{layer});
+  % Sum of outer products
+  Theta_grad{l} += d{l+1}' * [ones(m,1) activation{l}];
 
-  describe layer grad_Theta{layer} d{layer+1} sigmoid(Z{layer})
-  % describe grad_Theta{layer}
+  % Add regularisation term
+  Theta_grad{l}(2:end) += lambda * Theta{l}(2:end);
+  Theta_grad{l} /= m;
 end
 
 % Unroll gradients
 grad=[];
-for i = 1:length(grad_Theta)
-  % printf("size(grad_Theta{i})")
-  % size(grad_Theta{i})
-  grad = [grad; grad_Theta{i}(:)];
-  % describe grad
-  % describe grad_Theta{i}
+for i = 1:length(Theta_grad)
+  grad = [grad; Theta_grad{i}(:)];
 end
+
+% ------- End of Ravi's code --------
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
