@@ -77,60 +77,6 @@ end
 % Compute gradients via backpropagation
 %
 
-% Inintialise Thetas via Normalised Initialisation
-% https://stats.stackexchange.com/questions/291777/why-is-sqrt6-used-to-calculate-epsilon-for-random-initialisation-of-neural-net
-% for i = 1:length(Theta)
-%   Theta{i} = randInitializeWeights(columns(Theta{i})-1, rows(Theta{i}));
-% end
-
-
-% % --------------------------------------------------------------------------
-% yy = y;
-% oldX = X;
-% X = [ones(m,1) X];
-%
-% %----------------------
-%
-% [Theta1, Theta2] = Theta{1:2};
-% Theta1 = Theta{1};
-% Theta2 = Theta{2};
-%
-% Theta1_grad = zeros(size(Theta1));
-% Theta2_grad = zeros(size(Theta2));
-%
-%
-% t=1;
-% for t=1:m
-%   % forward pass
-%   a1 = X(t,:);
-%   z2 = Theta1*a1';
-%   a2 = [1; sigmoid(z2)];
-%   z3 = Theta2*a2;
-%   a3 = sigmoid(z3);
-%  
-%   % backprop
-%   delta3 = a3-yy(t,:)';
-%   delta2 = (Theta2'*delta3).*[1; sigmoidGradient(z2)];
-%   delta2 = delta2(2:end);
-%
-% d2_ok = zeros(m, columns(Theta2)-1);
-%  
-%   Theta1_grad = Theta1_grad + delta2*a1;
-%   Theta2_grad = Theta2_grad + delta3*a2';
-% end
-%  
-% Theta1_grad = (1/m)*Theta1_grad+(lambda/m)*[zeros(size(Theta1, 1), 1) Theta1(:,2:end)];
-% Theta2_grad = (1/m)*Theta2_grad+(lambda/m)*[zeros(size(Theta2, 1), 1) Theta2(:,2:end)];
-%  
-% % Unroll gradients
-% grad = [Theta1_grad(:) ; Theta2_grad(:)];
-%  
-%
-%
-% ------------------------
-% return
-% X = oldX;
-
 % Get Z (non-activated output) of all neurons in network
 [hX, Z] = predict(Theta1, Theta2, X);
 
@@ -138,27 +84,49 @@ end
 layers = 1 + length(Theta);
 d{layers} = hX - y;
 
-%   % backprop
-%   delta3 = a3-yy(t,:)';
-%   delta2 = (Theta2'*delta3).*[1; sigmoidGradient(z2)];
-%   delta2 = delta2(2:end);
-
 % Propagate errors backwards through hidden layers
 for layer = layers-1 : -1 : 2
   d{layer} = d{layer+1} * Theta{layer};
   d{layer} = d{layer}(:, 2:end); % Remove "error" for constant bias term
   d{layer} .*= sigmoidGradient(Z{layer});
-  % d{layer} .*= sigmoidGradient([ones(m,1) Z{layer}]);
-  % describe layer Theta{layer} d{layer+1} sigmoid(Z{layer}) d{layer};
 end
 
-% delta2s are EQUAL.
-% printf("Difference in d2: %f\n",  sum(sum(abs(d2_ok - d{2}))));
-% describe delta2_1
-% disp(delta2_1)
-% describe d{2}(1,:)
-% disp(d{2}(1,:)')
-% ----- end delta2 EQUAL --------
+% --------------------------------------------------------------------------
+yy = y;
+oldX = X;
+X = [ones(m,1) X];
+
+%----------------------
+
+[Theta1, Theta2] = Theta{1:2};
+
+t=1;
+for t=1:m
+  % forward pass
+  a1 = X(t,:);
+  z2 = Theta1*a1';
+  a2 = [1; sigmoid(z2)];
+  z3 = Theta2*a2;
+  a3 = sigmoid(z3);
+
+delta3 = d{3}(t,:)';
+delta2 = d{2}(t,:)';
+
+% d2_ok = zeros(m, columns(Theta2)-1);
+
+  Theta1_grad = Theta1_grad + delta2*a1;
+  Theta2_grad = Theta2_grad + delta3*a2';
+end
+
+Theta1_grad = (1/m)*Theta1_grad+(lambda/m)*[zeros(size(Theta1, 1), 1) Theta1(:,2:end)];
+Theta2_grad = (1/m)*Theta2_grad+(lambda/m)*[zeros(size(Theta2, 1), 1) Theta2(:,2:end)];
+
+% Unroll gradients
+grad = [Theta1_grad(:) ; Theta2_grad(:)];
+
+% ------------------------
+return
+X = oldX;
 
 % "Theta1_grad" is a matrix of size [25 401]
 % "delta2" is a matrix of size [25 1]
