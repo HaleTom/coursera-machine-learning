@@ -11,7 +11,11 @@ function varargout = describe(varargin)
     for n = 1:nargin
         % Variables are passed by name, so check if they exist
         try v = evalin('caller', varargin{n});
-            outstring = [outstring, '"', varargin{n}, '" is a ', typeinfo(v), ' of size ', mat2str(size(v)), '\n'];   
+            if isscalar(v)
+                outstring = [outstring, '"', varargin{n}, '" is a ', class(v), ' = ', num2str(v), '\n'];
+            else
+                outstring = [outstring, '"', varargin{n}, '" is a ', typeinfo(v), ' of size ', mat2str(size(v)), '\n'];
+            end
         catch
             outstring = [outstring, 'Variable "', varargin{n}, '" not found!\n'];
         end
