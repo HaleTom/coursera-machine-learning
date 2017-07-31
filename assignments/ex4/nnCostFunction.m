@@ -2,7 +2,7 @@ function [J grad] = nnCostFunction(nn_params, ...
                                    input_layer_size, ...
                                    hidden_layer_size, ...
                                    num_labels, ...
-                                   X, y, lambda)
+                                   X, Y, lambda)
 %NNCOSTFUNCTION Implements the neural network cost function for a two layer
 %neural network which performs classification
 %   [J grad] = NNCOSTFUNCTON(nn_params, hidden_layer_size, num_labels, ...
@@ -44,23 +44,23 @@ Theta={Theta1; Theta2};
 
 % Transform y from integers in 1:10 into vectors which would be returned by the
 % output layer
-yOutput = zeros(length(y), rows(Theta{end}));
+YOutput = zeros(length(Y), rows(Theta{end}));
 
 K = rows(Theta{end}); % Number of classes
 
-for i = 1:length(y)
+for i = 1:length(Y)
   % Expect integers from 1:
-  if (!(class = y(i)) == floor(class) || class < 1 || class > K) 
+  if (!(class = Y(i)) == floor(class) || class < 1 || class > K) 
     printf("unexpected value y(%d) = %f. Bailing.\n", i, class);
     return
   end
-  yOutput(i, y(i)) = 1;
+  YOutput(i, Y(i)) = 1;
   % Or, faster (but no validation):
   % yv=[1:num_labels] == y % Use Broadcasting
   % Or
   % yv = bsxfun(@eq, y, 1:num_labels);
 end
-y = yOutput;
+Y = YOutput;
 
 %
 % Compute unregularised cost (J)
@@ -70,7 +70,7 @@ y = yOutput;
 [hX, z, activation] = predict(Theta1, Theta2, X);
 
 hX = predict(Theta1, Theta2, X);
-J = 1/m * sum(sum((-y .* log(hX) - (1 - y) .* log(1 - hX))));
+J = 1/m * sum(sum((-Y .* log(hX) - (1 - Y) .* log(1 - hX))));
 
 % Add regularisation
 for i = 1:length(Theta)
@@ -83,7 +83,7 @@ end
 
 % Get error of output layer
 layers = 1 + length(Theta);
-d{layers} = hX - y;
+d{layers} = hX - Y;
 
 % Propagate errors backwards through hidden layers
 for layer = layers-1 : -1 : 2
@@ -100,7 +100,7 @@ for l = 1:layers-1
   Theta_grad{l} += d{l+1}' * [ones(m,1) activation{l}];
 
   % Add regularisation term
-  Theta_grad{l}(2:end) += lambda * Theta{l}(2:end);
+  Theta_grad{l}(:, 2:end) += lambda * Theta{l}(:, 2:end);
   Theta_grad{l} /= m;
 end
 
