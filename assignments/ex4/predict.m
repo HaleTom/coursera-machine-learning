@@ -1,4 +1,4 @@
-function [hX, z_output, activation] = predict(Theta1, Theta2, X)
+function [p, z_output, activation] = predict(Theta1, Theta2, X)
 %PREDICT Predict the label of an input given a trained neural network
 %   p = PREDICT(Theta1, Theta2, X) outputs the predicted output layer output
 %   trained weights of a neural network (Theta1, Theta2)
@@ -40,7 +40,7 @@ for layer = 2:length(Theta) + 1
   % describe activation{layer}
 end
 
-hX = activation{end};
+[dummy, p] = max(activation{end}, [], 2);
 
 % =========================================================================
 

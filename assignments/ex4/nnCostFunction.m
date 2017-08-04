@@ -67,9 +67,9 @@ Y = YOutput;
 %
 
 % Get h(X) and z (non-activated output of all neurons in network)
-[hX, z, activation] = predict(Theta1, Theta2, X);
+[~, z, activation] = predict(Theta1, Theta2, X);
 
-hX = predict(Theta1, Theta2, X);
+hX = activation{end};
 J = 1/m * sum(sum((-Y .* log(hX) - (1 - Y) .* log(1 - hX))));
 
 % Add regularisation
