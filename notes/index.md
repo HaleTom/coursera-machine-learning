@@ -1,0 +1,6 @@
+* [Week 1](wk1.md)
+* [Week 2](wk2.md)
+* [Week 3](wk3.md)
+* [Week 4](wk4.md)
+* [Week 5](wk5.md)
+* [Week 6](wk6.md)
