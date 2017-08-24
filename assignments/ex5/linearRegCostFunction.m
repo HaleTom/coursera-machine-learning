@@ -19,16 +19,18 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
+differences = (X * theta - y);
+J = 1/(2*m) * differences' * differences;
 
+% Ones only for elements 2:end
+% regressionMask = ones(size(theta)) - eye(size(theta))
+describe theta
+regressionMask = [0; ones(rows(theta)-1, 1)];
 
+J += lambda / 2 / m * theta' * (theta .* regressionMask);
 
-
-
-
-
-
-
-
+grad = 1/m * X' * (X * theta - y);
+grad += lambda / m * (theta .* regressionMask);
 
 % =========================================================================
 
