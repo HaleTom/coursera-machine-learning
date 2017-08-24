@@ -15,7 +15,7 @@
 ### Notation
 $$\begin{align*}
 x_j^{(i)} &= \text{value of feature } j \text{ in the }i^{th}\text{ training example} \\
-x^{(i)}& = \text{the feature inputs of the }i^{th}\text{ training example (as a column vector)} \\
+x^{(i)}& = \text{the feature inputs of the }i^{th}\text{ training example (as a column vector for now)} \\
 m &= \text{the number of training examples} \\
 n = \left| x^{(i)} \right| & = \text{(the number of features)} \end{align*} $$
 
