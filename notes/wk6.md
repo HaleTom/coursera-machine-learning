@@ -12,6 +12,7 @@ Don't apply at random - gathering more training data could take months. For diag
 
 ## Machine learning diagnostics
 
+
 Diagnostics can take some time to implement, but can be a very good use of time. Reconnaissance time is seldom wasted.
 
 
@@ -107,9 +108,9 @@ To select $\lambda$, redefine the cost function to **exclude** the regularisatio
 
 2. Create a set of models with different degrees or any other variants.
 
-3. Iterate through the $\lambda$s: for each $\lambda$ iterate through all the models to learn the $\Theta$s. $\lambda$ is used as per usual..
+3. Iterate through the $\lambda$s: for each $\lambda$ iterate through all the models to learn the $\Theta$s. $\lambda$ is used as per usual.
 
-4. Compute the cross validation error using the learned $\Theta$ (computed with $\lambda$) on the $J_{CV}(\Theta)$ **without** regularization or $\lambda$ = $\Theta$.
+4. Compute the cross validation error using the learned $\Theta$ (computed with $\lambda$) on the $J_{CV}(\Theta)$ **without** regularization ($\lambda = 0$).
 
 5. Select the best $\lambda$ and model combination (the lowest error on the cross validation set).
 
@@ -144,6 +145,11 @@ Use learning curves to:
   * Diagnose bias / variance problems
 
 Artificially vary the training set size to see how performance varies.
+
+### Implementation
+1. Learn on increasing values of $m$ training examples, using $\lambda \ne 0$
+1. Plot $J_{train}$ based on the *reduced* training set. Use $\lambda = 0$
+1. Plot $J_{cv}$ based on the *entire* CV set. Use $\lambda = 0$
 
 ### High bias
 
@@ -195,7 +201,7 @@ Things to try based on the diagnostics:
 
 A neural network with fewer parameters (nodes) is prone to underfitting. It is also computationally cheaper.
 
-A large neural network with more parameters is prone to overfitting. It is also computationally expensive. Often larger is better and regularization (increase \$lambda$) will address the overfitting.
+A large neural network with more parameters is prone to overfitting. It is also computationally expensive. Often larger is better and regularization (increase $\lambda$) will address the overfitting.
 
 Use a single hidden layer as a default. Use the CV set to train various numbers of layers and select the best performing one.
 
@@ -206,6 +212,184 @@ Use a single hidden layer as a default. Use the CV set to train various numbers 
 * In reality, we would want to choose a model somewhere in between, that can generalize well but also fits the data reasonably well.
 Mark as completed
 
+
+
+# Machine Learning System Design
+
+## Prioritisation: what to work on
+
+The first decision is how we want to represent the features, and the labels.
+
+Consider a spam classifier with lower than desired accuracy. How choose which path will best improve accuracy?
+
+* Collect lots of data (for example "honeypot" project but doesn't always work)
+* Develop sophisticated features (for example: using email header data in spam emails)
+* Develop algorithms to process your input in different ways
+ * Recognizing intentional misspellings
+ * Finding common word stems
+* Develop features around punctuation? 
+
+Don't use gut instinct:
+
+* Often a research group randomly focus on one option
+ * May not be the most fruitful way to spend your time
+* If you brainstorm a set of options this is really good
+ * Very tempting to just try something
+
+## Error analysis
+
+The recommended approach to solving machine learning problems is to:
+
+1. Start with a simple algorithm, implement it quickly, and test it early on your cross validation data.
+ * Andrew says at most one day to get something quick and dirty up and working.
+1. Plot learning curves to decide if more data, more features, etc. are likely to help.
+  * Avoid premature optimisation
+  * Let evidence guide decisions on time investment
+1. Error analysis: Manually examine the errors on examples in the cross validation set and try to spot a trend where most of the errors were made.
+
+### Error analysis
+
+* Classify the misclassifications into types
+ * Work on the most common type first
+* Find which features would have helped in correct classification
+
+### Try it and see
+
+The only way to know if something is helpful/harmful may be to try it.
+
+But how to determine what is an improvement / degradation? (Answer in next heading!)
+
+### Error / Accuracy evaluation metrics
+
+Numerical evaluation: It's important to have a single real number, eg accuracy or error which can be used in comparisons.
+
+Spend the minimum time on implementing a quick and dirty solution to be able to get learning curves and numerical evaluation.
+
+$$ Accuracy = \frac{\text{true positives + true negatives}}{\text{total examples}} $$
+$$ Error = \frac{\text{false positives + false negatives}}{\text{total examples}} $$
+
+## Error metrics for skewed classes
+
+Skewed classes are where there are **many** more examples of one class than another.
+
+An error rate of 1% looks good until I learn that only 0.5% of the data is class y=1.
+
+Simply by hard-coding a prediction of the most common class (y=0), there is a "low error rate".
+(In this case, Recall will = 0, see below)
+
+How do we know if a lower error rate actually means a better hypothesis?
+
+## Precision / Recall
+Precision and recall indicate a classifier's accuracy.
+
+Both:
+* Value between 0 and 1
+* Closest to 1 is best
+* High value of both indicate a good classifier even with skewed classes
+
+Thinking in terms of defect detection helps remember what the terms are.
+
+#### Convention
+ * $y=1$ in the presence of the rare class
+
+![true/false positive/negatives](wk6-true-false-positive-negative.png)
+
+* Type 1 error = false positive
+* Type 2 error = false negative
+
+![Precision vs recall](wk6-Precisionrecall.svg)
+
+#### Precision
+* **How confident is the prediction?** (wary implies confident)
+* Of all predictions, what fraction is correct?
+* How low are the false positives?
+* Gives the ratio of true positives, or the inverse of "crying wolf".
+* Think: "of all defects detected, how many were actually defective?"
+ * How many special case detections are correct?
+
+$$\text{Precision} = \dfrac{\text{True Positives}}{\text{Total number of predicted positives}}
+= \dfrac{\text{True Positives}}{\text{True Positives}+\text{False positives}}$$
+
+Note: if an algorithm predicts only negatives, then the precision is not defined; it is impossible to divide by 0. The weighted average of the two, the [harmonic $F_1$ score](https://en.wikipedia.org/wiki/F1_score) will not be defined also.
+
+#### Recall
+* **How safe is the prediction?** (overly inclusive)
+* Of all actual cases, how many were predicted?
+ * ie, How low are the false negatives?
+* Think: "of all actual defects, how many were detected?"
+ * How good are we at detecting the special case?
+
+$$\text{Recall} = \dfrac{\text{True Positives}}{\text{Total number of actual positives}}= \dfrac{\text{True Positives}}{\text{True Positives}+\text{False negatives}}$$
+
+A false negative should have been a positive.
+
+## Balancing Precision vs Recall
+
+To increase the confidence of a prediction, we could say:
+Predict $y=1$ only if $h_\theta(x) \geq 0.7$
+
+* Increasing the threshold will increase Precision and decrease Recall.
+* Decreasing the threshold will increase Recall and decrease Precision.
+
+![Precision vs Recall graph](wk6-PR-graph.png)
+The curves can be of varying shapes.
+
+### Choosing the threshold automatically
+
+We said above that it's important to have a single number by which to compare algorithms, but now we have two.
+
+In order to turn these two metrics into one single number, we can take the $F$ value.
+
+Taking the average is not good as it still will have some value when either precision or recall is 0.
+
+It's better to use:
+$$F_1\ \text{Score} = 2\dfrac{PR}{P + R}$$
+
+This is often said simply as "F score".
+
+In order for the $F_1$ Score to be large, both precision and recall must be large.
+
+Again, train precision and recall on the cross validation set so as not to bias our test set.
+
+## Data Set Size
+
+Generally, increasing training set size will improve the performance of an algorithm. 
+
+![Algorithm performance vs data set size](wk6-algo-data.png)
+
+An "inferior algorithm," if given enough data, can outperform a superior algorithm with less data.
+
+What can we conclude:
+* Algorithms may give quite similar performance
+* As training set sizes increases accuracy increases
+* Take an algorithm, give it more data, should beat a "better" one with less data
+
+We must choose our features to have enough information.
+
+A useful test is:
+* Given input x, would a human expert be able to confidently predict y?
+
+Rationale for large data:
+
+If:
+* The features have sufficient information
+* We use use a an algorithm with many parameters (low bias)
+* Have many training examples
+
+Then:
+* $J_{train} \approx J_{test}$
+* Both errors will be small
+
+If we have a low bias algorithm (many features or hidden units making a very complex function), then the larger the training set we use, the less we will have overfitting (and the more accurate the algorithm will be on the test set).
+
+* Low bias --> use complex algorithm
+* Low variance --> use large training set
+
+## References:
+* https://class.coursera.org/ml/lecture/index
+* http://www.cedar.buffalo.edu/~srihari/CSE555/Chap9.Part2.pdf
+* http://blog.stephenpurpura.com/post/13052575854/managing-bias-variance-tradeoff-in-machine-learning
+* http://www.cedar.buffalo.edu/~srihari/CSE574/Chap3/Bias-Variance.pdf
 
 
 # Pomodoros
