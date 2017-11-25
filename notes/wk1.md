@@ -30,12 +30,12 @@ https://github.com/hangtwenty/dive-into-machine-learning )
 
 Machine learning is the science of getting computers to learn without being explicitly programmed
 
-Supervised learning: Where the correct answers are given in training. Categorized into "regression" and "classification" problems.
+* Supervised learning: Where the correct answers are given in training.
 
-* Regression problem: trying to map input variables to some continuous function.
-- Classification problem: trying to predict results in a discrete output.
+  - Regression problem: trying to map input variables to some continuous function.
+  - Classification problem: trying to predict results in a discrete output.
 
-Unsupervised learning – deriving structure when we may not know the effects of the variables. Clustering based upon relationships.
+* Unsupervised learning: Deriving structure when we may not know the effects of the variables. Clustering based upon relationships.
 
 ## Linear Algebra
 
@@ -64,17 +64,18 @@ C_{ij} & = \sum_{k=1}^n A_{ik}B_{kj}
 \end{align}$$
 
 
-When multiplying matrices $A \times B$
+When multiplying matrices $A \times B$:
 
+* Work down the rows of $A$. Work across the columns of $B$.
 * Work across the columns of $B$, multiplying the row of $A$ by that vector.
 * Work across the columns of $B$, taking the dot product with the row of $A$. Repeat, working down the rows of $A$. This builds the resultant top-to-bottom, then left-to-right. 
 
 Video: https://www.youtube.com/watch?v=TwliA2BL_9g
 
 #### Properties
-* Not commutative: $A \times B \neq B \times A$ (except square matrix and identity matrix)
-  The product may not even be defined if the matrices are not square.
 * Associative: $(A \times B) \times C=A \times(B \times C)$
+* *Not* commutative: $A \times B \neq B \times A$ (but [sometimes commutative](https://martin-thoma.com/when-is-matrix-multiplication-commutative/ ))
+  The product may not even be defined if the matrices are not square.
 
 ### Identity matrix
 The identity matrix of dimensions $n \times n$ is denoted $I$ or $I_{n \times n}$ and defined by:
@@ -106,9 +107,9 @@ The transpose of $A \in \Bbb R^{m \times n}$ is denoted $A^T \in \Bbb R^{n \time
 Visually, the elements are reflected along the line of $1$s of the identity matrix.
 
 ### Practical uses
-Multiplying a matrix of Cartesian $x,y$ coordinates by the matrix $\begin{bmatrix}
-0 & -1 \\
-1 & 0
+Multiplying a matrix of Cartesian $x,y$ points by the matrix $\begin{bmatrix}
+1 & 0 \\
+0 & -1
 \end{bmatrix}$ will reflect an object vertically.
 
 A lot of computation can be performed by a matrix multiplication: e.g., testing 3 hypothesis at once. Here the multiplier's columns are $\theta$s and the resultant matrix's columns are $\hat y$.
@@ -134,7 +135,7 @@ To simplify notation, we let $x_0 = 1$ (called the *intercept term* (think $b$ i
 
 $$h(x) = \sum_{i=0}^n \theta_i x_i = \theta^Tx$$
 
-To learn the values of $\theta$, we need to make $h(x)$ as close as possible to $y$ for the training examples. For each value of $\theta$, the cost function measures how close $h(x^{(i)}))$ is to $y^{(i)}$.
+To learn the values of $\theta$, we need to make $h(x)$ as close as possible to $y$ for the training examples. For each value of $\theta$, the cost function measures how close $h\big(x^{(i)})\big)$ is to $y^{(i)}$.
 
 ### Mean Squared Error (Cost) Function
 
@@ -142,7 +143,7 @@ The most commonly used for linear regression problems.  *Ordinary least squares*
 
 $$ J(\theta) = \dfrac {1}{2m} \displaystyle \sum _{i=1}^m \left ( \hat{y}_{i}- y_{i} \right)^2 $$
 
-Here, $\hat y$ represents the predicted equation for a line of best fit in linear regression. $\hat y_i$ is $h_\theta(x^{(i)}$).
+Here, $\hat y$ represents the predicted equation for a line of best fit in linear regression. $\hat y_i$ is $h_\theta(x^{(i)})$.
 
 Simplistically, this is $\frac 1 2 \bar x$ where $\bar x$ is the mean of the squares of $\hat y_i - y_i$
 
@@ -159,7 +160,7 @@ This function is also called the "Mean Squared Error". The $ \frac 1 2$ is cance
 
 Notation: Partial derivative: $\partial$, derivative: $d$.
 
-Derivative with $n \ge 1$ features ($x_0^{(i)} = 1$):
+Derivative with $n \ge 1$ features (since $x_0^{(i)} = 1$):
 
 $$\frac{\partial}{\partial\theta_j} J = \frac{1}{m} \sum_{i=1}^m \left(h_\theta(x^{(i)})-y^{(i)}\right) x_j^{(i)}$$
 

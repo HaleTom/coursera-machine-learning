@@ -19,7 +19,9 @@ x^{(i)}& = \text{the feature inputs of the }i^{th}\text{ training example (as a 
 m &= \text{the number of training examples} \\
 n = \left| x^{(i)} \right| & = \text{(the number of features)} \end{align*} $$
 
-$\forall i \in 1,\dotsc,m$, we assume that $x_0^{(i)} = 1$ so that $x$ matches $\theta$ element-wise. The dimensions of both are $n+1$ due to the intercept term in $\theta$. ($n =$ the number of features).
+$\forall i \in 1,\dotsc,m$, we assume that $x_0^{(i)} = 1$ so that $x$ matches $\theta$ element-wise.
+
+There are $n+1$ elements in both $x$ and $\theta$ due to the intercept/bias term. ($n =$ the number of features).
 
 ### Multivariate regression
 
@@ -56,14 +58,14 @@ $\theta := \theta - \alpha \nabla J(\theta)$ where:
 
 $ \nabla J(\theta)  = \begin{bmatrix}\frac{\partial J(\theta)}{\partial \theta_0}   \newline \frac{\partial J(\theta)}{\partial \theta_1}   \newline \vdots   \newline \frac{\partial J(\theta)}{\partial \theta_n} \end{bmatrix}$
 
-$\;$
+Each element in this vector is:
 
 $\begin{align}
 \frac{\partial J(\theta)}{\partial \theta_j} &= \frac{1}{m} \sum\limits_{i=1}^{m}  \left(h_\theta(x^{(i)}) - y^{(i)} \right) \cdot x_j^{(i)} \\[3pt]
 &= \frac{1}{m} \sum\limits_{i=1}^{m}   x_j^{(i)} \cdot \left(h_\theta(x^{(i)}) - y^{(i)}  \right) \quad \text{(transposing terms)}
 \end{align}$
 
-The $x^{(i)}_j$ above, for i = 1,...,m, represents the $m$ elements of the $j$-th column, $\vec{x_j}$, of the training set $X$.
+The $x^{(i)}_j$ above, for $i = 1,\dots,m$, represents the $m$ elements of the $j$-th column, $\vec{x_j}$, of the training set $X$.
 
 $\begin{align} \frac{\partial J(\theta)}{\partial \theta_j} &= \frac1m  \vec{x_j}^{T} (X\theta - \vec{y}) \\[6pt]
 \nabla J(\theta) &= \frac 1m X^{T} (X\theta - \vec{y})  \quad \text{(multiplying by all columns)}\end{align}$
