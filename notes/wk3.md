@@ -13,7 +13,7 @@ The $y$ value for a given training example is called the *label*.
 ### Logistic Regression
 The name is historical - it is not used for regression problem, it's a classification algorithm.
 
-In logistic regression, $0 \le h_\theta(x) \le 1$.
+Logistic regression gives a *probability*: $0 \le h_\theta(x) \le 1$.
 
 Using linear regression doesn't work - classification is not a linear function: a single outlier would skew the fit line, and also allow for values outside the interval $(0, 1)$.
 
@@ -21,11 +21,13 @@ Using linear regression doesn't work - classification is not a linear function: 
 
 We use the "Sigmoid Function," also called the "Logistic Function" to map any real number to the interval $(0, 1)$:
 
-$$\begin{align*}
-& h_\theta (x) =  g ( \theta^T x ) \\[6pt]
-& z = \theta^T x \\
-& g(z) = \dfrac{1}{1 + e^{-z}}
-\end{align*}$$
+$\begin{align*}
+h_\theta (x) &=  g (z) \\
+z &= \theta^T x \\
+g(z) &= \dfrac{1}{1 + e^{-z}}
+\end{align*}$
+
+Notable points:
 
 $\begin{align*}z=0,  e^{0}=1 \Rightarrow  g(z)=\textstyle\frac1 2\newline z \to \infty, e^{-\infty} \to 0 \Rightarrow g(z)=1 \newline z \to -\infty, e^{\infty}\to \infty \Rightarrow g(z)=0 \end{align*}$
 
@@ -57,8 +59,8 @@ $\ 1 ,\ x_1 ,\ x_2 ,\ x_1^2 ,\ x_1x_2 ,\ x_2^2 ,\ x_1^3 ,\ x_1^2x_2 ,\ x_1x_2^2 
 In order to get discrete 0 or 1 classification, we can define the hypothesis function as follows:
 
 $h_\theta(x)= \begin{cases}
-1, & \text{if}\; \theta^Tx \ge 0 \left(\implies \dfrac{1}{1 + e^{-\theta^Tx}} \ge 0.5 \right)\\[6pt]
-0, & \text{if}\; \theta^Tx \lt 0 \left(\implies \dfrac{1}{1 + e^{-\theta^Tx}} \lt 0.5 \right)\\
+1, & \text{if}\; z \ge 0 \left(\implies \dfrac{1}{1 + e^{-z}} \ge 0.5 \right)\\[6pt]
+0, & \text{if}\; z \lt 0 \left(\implies \dfrac{1}{1 + e^{-z}} \lt 0.5 \right)\\
 \end{cases}$
 
 The decision boundary is the line of points where $h_\theta(x) = 0.5$, determined by the value of $\theta$.
@@ -79,19 +81,22 @@ Logistic regression needs a different cost function than linear regression becau
 
 To get guaranteed convex functions, we define:
 
-$$\begin{align*}
+$\begin{align*}
 J(\theta) &= \dfrac{1}{m} \sum_{i=1}^m \mathrm{Cost}(h_\theta(x^{(i)}),y^{(i)}) \\
+\text{Where:}& \\
 \mathrm{Cost}(h_\theta(x),y) &=
   \begin{cases}
     -\log(1-h_\theta(x)) \; & \text{if y = 0} \\
     -\log(h_\theta(x)) \; & \text{if y = 1} \\
   \end{cases}
-\end{align*}$$
+\end{align*}$
 
-$$ \begin{align*}& \mathrm{Cost}(h_\theta(x),y) = 0 &&\text{ if } h_\theta(x) = y \\
+This gives:
+
+$ \begin{align*}& \mathrm{Cost}(h_\theta(x),y) = 0 &&\text{ if } h_\theta(x) = y \\
 & \mathrm{Cost}(h_\theta(x),y) \rightarrow \infty &&\text{ if } y = 0 \; \mathrm{and} \; h_\theta(x) \rightarrow 1 \\
 & \mathrm{Cost}(h_\theta(x),y) \rightarrow \infty &&\text{ if } y = 1 \; \mathrm{and} \; h_\theta(x) \rightarrow 0 \newline
-\end{align*}$$
+\end{align*}$
 
 This uses *maximum likilihood estimation* from statistics.
 
@@ -247,7 +252,7 @@ Where $\lambda$ is the regularisation parameter, determining the $\theta_j$ para
 
 This will encourage having fewer features, as adding a feature (non-zero $\theta_j$) will incur a cost.
 
-By convention, regularisation is not applied to the intercept term $j=0$.
+By convention, regularisation is **not** applied to the intercept term $j=0$.
 
 Small $\lambda$ prefers fitting the training set closely (possible overfitting). Large $\lambda$ is a preference for fewer features and underfitting.
 
@@ -272,7 +277,7 @@ $$\begin{align*}
 & \rbrace
 \end{align*}$$
 
-The first term, $1 - \alpha\frac{\lambda}{m}$ should always be $ \lt 1$, reducing the value of $\theta_j$ by some amount on every update. The second term is now exactly the same as the non-regularised equation.
+The $1 - \alpha\frac{\lambda}{m}$ should always be $ \lt 1$, reducing the value of $\theta_j$ by some amount on every update. The second term is now exactly the same as the non-regularised equation.
 
 ## Regularised logistic regression Octave code:
 ```Matlab

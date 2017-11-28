@@ -71,7 +71,7 @@ Layer order (left to right):
 2. Hidden layer(s)
    * Values are not observable
    * Compute functions of increasing complexity
-3. Output layer - single neuron giving $h\Theta(x)$
+3. Output layer - $h(x)$
 
 ### Notation
 
@@ -84,13 +84,13 @@ $$\begin{bmatrix}x_0 \newline x_1 \newline x_2 \newline x_3\end{bmatrix}\rightar
 Each layer has its own matrix of weights, $\Theta^{(j)}$.   
 If a network has $s_j$ units in layer $j$ and $s_{j+1}$ units in layer $j+1$, then $\Theta^{(j)}$ will be of dimension $s_{j+1} \times (s_j + 1)$.
 
-The *rows* represent the output / activation nodes - a $\theta^T$ vector for each.
-The *columns* are coefficients/weights to apply to the inputs (plus bias node), total $s_j + 1$.  
+The *rows* map to the output of neurons - a $\theta^T$ vector for each.
+The *columns* are weights to apply to the inputs (plus bias node), total $s_j + 1$.  
 
 ![Layers](wk4-layers.png)
 
 Each activation node's input is a weighted linear combination of the input nodes.  
-This sum is then passed through the sigmoid function to the next layer:
+This sum is then passed through the sigmoid function ($g$) to the next layer:
 
 $$\begin{align*}
 a_1^{(2)} &= g(\Theta_{1,0}^{(1)}x_0 + \Theta_{1,1}^{(1)}x_1 + \Theta_{1,2}^{(1)}x_2 + \Theta_{1,3}^{(1)}x_3) \newline
@@ -111,7 +111,7 @@ $a^{(j+1)} = g(z^{(j+1)}) = \mathrm{sigmoid}(\Theta^{(j)}a^{(j)})$
 
 Forward propagation takes the input layer and sequentially applies the weighted transforms of each of the hidden layers and output layer.  Sometimes called *feed forward*.
 
-Think of each layer as a matrix: a list of nodes (rows). Think of each node as being an (input-layer-numbered) $\theta$ which combines (weighted sum) its inputs as: $\theta^T a^{(j-1)}$, and outputs the sigmoid.
+Think of each layer $(j)$ as a matrix $\Theta^{(j-1)}$: a list of nodes (rows). Think of each node as being an (input-layer-numbered) $\theta$ which combines (weighted sum) its inputs as: $\theta^T a^{(j-1)}$, and outputs the sigmoid.
 
 The last unit may be a simple logistic regression, summing the weighted inputs and outputting $\mathrm{sigmoid}(\theta^T a^{(j-1)})$.
 
@@ -128,7 +128,7 @@ $$\begin{alignat}{1}
 & \mathrm{sigmoid}(-4.6) & \lt 0.01 && \approx 0
 \end{alignat}$$
 
-Logical *OR* can be implemented with $\Theta = \begin{bmatrix}-10 & 20 & 20\end{bmatrix}$:
+Logical *OR* can be implemented with $\theta = \begin{bmatrix}-10 & 20 & 20\end{bmatrix}$:
 ![Sigmoid and OR table](wk4-sigmoid-OR.png)
 
 ![Logical operations](wk4-xnor.png)
