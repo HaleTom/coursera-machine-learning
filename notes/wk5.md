@@ -200,7 +200,7 @@ More to come later in the course on selecting the number of hidden layers and un
 1. Implement forward propagation to get $h_\Theta(x^{(i)})$ for any $x^{(i)}$
 1. Implement the cost function
 1. Implement backpropagation to compute partial derivatives
-  `for i =1:m`:
+  `for i = 1:m`
   1. Perform forward propagation and backpropagation using example $(x(i),y(i))$
   1. Get activations $a(l)$ and $\delta(l)$ for $l = 2,\dots,L$
   1. $\forall l, \; \Delta^{(l)} := \Delta^{(l)} + \delta^{(l+1)}(a^{(l)})^T$

@@ -54,6 +54,8 @@ Data sets:
 * 20% - Cross validation (CV) - find optimum polynomial degree
 * 20% - Test - evaluate performance on previously unseen data
 
+Note: [Can I use a tiny Validation set?](https://stats.stackexchange.com/questions/304977/can-i-use-a-tiny-validation-set) shows that the accuracy of estimates depends on the absolute size of the CV set.
+
 The *degree* or order of polynomial, "$d$" can be considered another parameter which needs to be chosen.
 
 If we used the test set to pick the degree and measure performance, we would underestimate the generalisation error on unseen examples.
