@@ -38,7 +38,7 @@ To find $\min\limits_\Theta J(\Theta)$ we need to find the partial derivative of
 To find the partial derivative, we first find $\delta_j^{(l)}$ or the "error" of node $j$ in layer $l$.
 
 In the output layer: $\delta^{(L)} = a^{(L)} - y = h_\Theta(x) - y$
-In hidden layers: $\delta^{(l)} = ((\Theta^{(l)})^T \delta^{(l+1)})\ \odot\ g'(z^{(l)}) = ((\Theta^{(l)})^T \delta^{(l+1)})\ \odot a^{(l)} \odot\ (1 - a^{(l)})$
+In hidden layers: $\delta^{(l)} = \big( (\Theta^{(l)})^T \delta^{(l+1)} \big)\ \odot\ g'(z^{(l)}) = ((\Theta^{(l)})^T \delta^{(l+1)})\ \odot a^{(l)} \odot\ (1 - a^{(l)})$
 In the input layer, having an error doesn't make sense as the values come from the training set.
 
 
@@ -59,10 +59,10 @@ $\forall t \in $ training set $\lbrace (x^{(1)}, y^{(1)}) \cdots (x^{(m)}, y^{(m
 
 3. Compute the error in the output layer: $\delta^{(L)} = a^{(L)} - y^{(t)}$
 
-4. Work back through the hidden layers, apportioning errors $\delta^{(L-1)}, \delta^{(L-2)},\dotsc,\delta^{(2)}$ based on the weights in the $\Theta^{(l+1)}$s.
+4. Work back through the hidden layers, apportioning errors $\delta^{(L-1)}, \delta^{(L-2)},\dotsc,\delta^{(2)}$ based on the weights in the $\Theta$s.
   $\delta^{(l)} = \big((\Theta^{(l)})^T \delta^{(l+1)}\big) \odot g'(z^{(l)})$
   $\delta^{(l)} = \big((\Theta^{(l)})^T \delta^{(l+1)}\big) \odot a^{(l)} \odot (1 - a^{(l)})$
-  * If any $\delta_0^{(l)}$s are calculated, they can be discarded as they are not needed in the derivative calculations (we know the bias nodes will always be $=1$).
+  * If any $\delta_0^{(l)}$s are calculated, they can be discarded as they are not needed in the derivative calculations (we know the derivative of the bias nodes will always be $1$).
   * The '$\odot$' represents the [Hadamard product](https://en.wikipedia.org/wiki/Hadamard_product_(matrices%29 ) or `.*` operator in Octave.
   * $\delta^{(1)} = 0$ as $a^{(1)} = x$
   * $g'(z^{(l)}) = a^{(l)} \odot (1 - a^{(l)}) =$ the [derivative of the logistic function](https://en.wikipedia.org/wiki/Logistic_function#Derivative ): ${\frac {d}{dx}}g(x) = g(x)(1-g(x))$
@@ -140,7 +140,7 @@ There can be subtle bugs with implementing backward propagation. $J(\theta)$ dec
 
 Andrew always implements gradient checking to ensure that his implementations of gradient descent are correct.
 
-![Gradient checking](wk5-gradient-checking.png)
+![Gradient checking](wk5-gradient-checking.png )
 
 Choosing $\epsilon = 10^{-4}$ is a good value. Numerical issues may arise if it is too small.
 One-sided difference:
