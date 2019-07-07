@@ -16,6 +16,8 @@ end
 currentFig=gcf(); % Restore for assignment script at the end
 
 % Tune alpha upwards
+% See my question:
+% https://stats.stackexchange.com/questions/341222/batch-gradient-descent-dynamically-maximising-learning-rate
 prev_cost = Inf;
 cost = computeCost(X, y, theta);
 
