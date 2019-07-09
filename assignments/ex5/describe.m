@@ -1,7 +1,8 @@
-% https://stackoverflow.com/a/45347880/5353461
+% Based upon https://stackoverflow.com/a/45347880/5353461
+% Gist at: https://gist.github.com/HaleTom/533b0ed7c51f93bfb5f71007a188bac4
 
 function varargout = describe(varargin)
-    % varargin used to accomodate variable number of input names
+    % varargin used to accommodate variable number of input names
     st = dbstack;
     outstring = '';
     for ii = size(st, 1):-1:2
