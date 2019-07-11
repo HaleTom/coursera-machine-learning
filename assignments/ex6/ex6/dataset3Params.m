@@ -23,12 +23,26 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+best_error = Inf;
+steps = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
 
-
-
-
-
+for C_step = 1:size(steps, 2)
+    for sigma_step = 1:size(steps, 2)
+        C_trial = steps(C_step)
+        sigma_trail = steps(sigma_step)
+        model = svmTrain(X, y, C_trial, @(x1, x2) gaussianKernel(x1, x2, sigma_trail));
+        visualizeBoundary(X, y, model);
+        predictions = svmPredict(model, Xval);
+        err = mean(double(predictions ~= yval));
+        if err < best_error
+            best_error = err;
+            C = C_trial;
+            sigma = sigma_trail;
+        end
+    end
+end
 
 % =========================================================================
 
 end
+
