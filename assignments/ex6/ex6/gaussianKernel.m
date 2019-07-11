@@ -15,9 +15,8 @@ sim = 0;
 %               sigma
 %
 
-exponent = sum((x1 - x2).^2) / ( 2 * sigma^2)
-
-sim = exp(-exponent)
+exponent = sum((x1 - x2).^2) / ( 2 * sigma^2);
+sim = exp(-exponent);
 
 % =============================================================
 
