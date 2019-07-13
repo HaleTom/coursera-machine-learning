@@ -24,17 +24,13 @@ centroids = zeros(K, n);
 %               centroid i.
 %
 % Note: You can use a for-loop over the centroids to compute this.
-%
 
-
-
-
-
-
-
+for k = 1:K
+    x_idx = find(idx==k);
+    centroids(k,:) = 1/length(x_idx) * sum(X(x_idx,:));
+end
 
 % =============================================================
-
 
 end
 
