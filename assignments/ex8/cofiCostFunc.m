@@ -41,6 +41,19 @@ Theta_grad = zeros(size(Theta));
 
 J = 1/2 * sum(sum( R .* (X * Theta' - Y) .^ 2));
 
+grad_common = R .* (X * Theta' - Y);
+
+% describe grad_common
+% describe X
+% describe Theta
+
+% "grad_common" is a matrix of size [5 4]
+% "X" is a matrix of size [5 3]
+% "Theta" is a matrix of size [4 3]
+
+X_grad = grad_common * Theta;
+Theta_grad = grad_common' * X;
+
 % =============================================================
 
 grad = [X_grad(:); Theta_grad(:)];
