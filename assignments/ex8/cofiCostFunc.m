@@ -54,6 +54,11 @@ grad_common = R .* (X * Theta' - Y);
 X_grad = grad_common * Theta;
 Theta_grad = grad_common' * X;
 
+X_regularisation_term     = lambda / 2 * sum(sum(Theta .^ 2))
+Theta_regularisation_term = lambda / 2 * sum(sum(X     .^ 2))
+
+J += X_regularisation_term + Theta_regularisation_term
+
 % =============================================================
 
 grad = [X_grad(:); Theta_grad(:)];
